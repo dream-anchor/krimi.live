@@ -8,15 +8,21 @@ import '@fontsource/instrument-sans/600';
 import '@fontsource/ibm-plex-mono/500';
 import '../styles/global.css';
 import Button from '../components/Button.astro';
-import { BASE, TERMINE_URL } from '../data/config';
+import { BASE } from '../data/config';
+import { aktiveFormate, laufendeFormate, formatPfad, ticketZiel } from '../lib/formate';
 import type { PageMeta } from '../data/meta';
-interface Props { meta: PageMeta; graph: any[] }
+interface Props { meta: PageMeta; graph: any[]; ogImage?: { datei: string; alt: string }; noindex?: boolean }
 const { meta, graph } = Astro.props;
 const canonical = meta.canonical || BASE + meta.path;
 const ld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
 const path = Astro.url.pathname;
+const aktiv = await aktiveFormate();
+const laufend = await laufendeFormate();
+const tickets = ticketZiel(laufend);
+const formatLink = aktiv.length === 1 ? formatPfad(aktiv[0]) : '/#buehne';
+const og = Astro.props.ogImage ?? aktiv[0]?.data.bilder.kopf;
 const nav = [
-  { href: '/formate/pater-brown/', label: 'Format' },
+  { href: formatLink, label: aktiv.length === 1 ? 'Format' : 'Formate' },
   { href: '/hintergruende/was-ist-ein-live-hoerspiel/', label: 'Hintergründe' },
   { href: '/ueber-uns/', label: 'Über uns' },
 ];
@@ -29,6 +35,7 @@ const nav = [
   <title>{meta.title}</title>
   <meta name="description" content={meta.desc} />
   <link rel="canonical" href={canonical} />
+  {Astro.props.noindex && <meta name="robots" content="noindex, follow" />}
   <meta name="theme-color" content="#0B0A09" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="de_DE" />
@@ -36,6 +43,9 @@ const nav = [
   <meta property="og:title" content={meta.title} />
   <meta property="og:description" content={meta.desc} />
   <meta property="og:url" content={canonical} />
+  {og && <meta property="og:image" content={`${BASE}${og.datei}-1200.webp`} />}
+  {og && <meta property="og:image:alt" content={og.alt} />}
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <script type="application/ld+json" set:html={ld} />
@@ -47,7 +57,7 @@ const nav = [
       <a href="/" aria-label="krimi.live – Startseite" class="mark">Krimi<span>.</span>live</a>
       <nav aria-label="Hauptnavigation" class="nav">
         {nav.map(n => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
-        <Button variant="primary" size="sm" href={TERMINE_URL} iconEnd="arrow-up-right">Tickets</Button>
+        <Button variant="primary" size="sm" href={tickets} iconEnd={laufend.length === 1 ? 'arrow-up-right' : undefined}>Tickets</Button>
       </nav>
     </div>
   </header>
@@ -63,9 +73,9 @@ const nav = [
         <p>Ein Magazin der Dream &amp; Anchor Handelsgesellschaft mbH, Produzentin von <a href="https://paterbrown.com/">„Pater Brown – Das Live-Hörspiel“</a>.<br />Künstlerische Leitung &amp; Creative Producerin: Stefanie Sick</p>
       </div>
       <nav aria-label="Fußnavigation" class="foot__nav">
-        <a href="/formate/pater-brown/">Format: Pater Brown</a>
+        {aktiv.map(f => <a href={formatPfad(f)}>Format: {f.data.name}</a>)}
         <a href="/hintergruende/was-ist-ein-live-hoerspiel/">Was ist ein Live-Hörspiel?</a>
-        <a href={TERMINE_URL}>Termine bei paterbrown.com</a>
+        {laufend.map(f => <a href={f.data.links.termine}>{`Termine${laufend.length > 1 ? ' ' + f.data.name : ''} bei ${new URL(f.data.links.termine).hostname}`}</a>)}
         <a href="/ueber-uns/">Über uns</a>
         <a href="/impressum/">Impressum</a>
         <a href="/datenschutz/">Datenschutz</a>

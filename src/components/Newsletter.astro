@@ -1,0 +1,43 @@
+---
+// Newsletter & Warteliste (Brevo, Double-Opt-in). Erscheint nur, wenn beim Build BREVO_API_KEY gesetzt ist.
+import Button from './Button.astro';
+import { NEWSLETTER_AKTIV } from '../data/config';
+interface Props { titel?: string; text?: string; id?: string }
+const {
+  titel = 'Neue Fälle zuerst erfahren',
+  text = 'Neue Stücke, Premieren und Termine per E-Mail, etwa einmal im Monat. Die Anmeldung gilt erst nach Ihrer Bestätigung per E-Mail.',
+  id = 'newsletter',
+} = Astro.props;
+---
+{NEWSLETTER_AKTIV && (
+  <section aria-labelledby={`${id}-h`} class="sec nl" id={id}>
+    <div class="wrap split">
+      <div class="split__side"><h2 id={`${id}-h`} class="h2">{titel}</h2></div>
+      <div class="split__main">
+        <p class="body-l nl__text">{text}</p>
+        <form method="post" action="/api/newsletter" class="nl__form">
+          <div class="nl__zeile">
+            <label class="sr-only" for={`${id}-email`}>E-Mail-Adresse</label>
+            <input id={`${id}-email`} name="email" type="email" required autocomplete="email" placeholder="E-Mail-Adresse" class="nl__input" />
+            <Button variant="primary" size="lg" type="submit">Anmelden</Button>
+          </div>
+          <div class="nl__hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <label class="nl__ok">
+            <input type="checkbox" name="einwilligung" value="ja" required />
+            <span>Ich möchte den Newsletter von krimi.live erhalten. Meine E-Mail-Adresse wird dafür an Brevo übermittelt; Abmeldung jederzeit über den Link in jeder E-Mail. Details in der <a href="/datenschutz/">Datenschutzerklärung</a>.</span>
+          </label>
+        </form>
+      </div>
+    </div>
+  </section>
+)}
+<style>
+.nl__text{margin-bottom:var(--space-6);max-width:62ch}
+.nl__zeile{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.nl__input{flex:1 1 260px;min-width:0;height:var(--control-lg);padding:0 20px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);background:var(--surface-1);color:var(--text-1);font:var(--fw-regular) 17px/1 var(--font-sans)}
+.nl__input::placeholder{color:var(--text-3)}
+.nl__input:focus-visible{outline:none;box-shadow:var(--focus-ring);border-color:var(--accent)}
+.nl__ok{display:flex;gap:12px;align-items:flex-start;margin-top:var(--space-5);font:var(--fw-regular) var(--fs-body-s)/1.55 var(--font-sans);color:var(--text-2);max-width:70ch}
+.nl__ok input{margin-top:3px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.nl__hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+</style>

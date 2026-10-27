@@ -2,9 +2,8 @@ export interface PageMeta { path: string; title: string; desc: string; canonical
 
 export const META = {
   start: { path: '/', title: 'krimi.live – Krimi live erleben | Live-Hörspiel & Bühne', desc: 'Krimis, die auf der Bühne entstehen: Hintergründe zum Live-Hörspiel und aktuelle Termine. Auf Tour: Pater Brown mit Antoine Monot und Wanja Mues.' },
-  format: { path: '/formate/pater-brown/', canonical: 'https://paterbrown.com/live-hoerspiel/', title: 'Pater Brown – Das Live-Hörspiel: das Format im Überblick', desc: 'Zwei Schauspieler, ein Beatboxer, zwei Fälle nach Chesterton: Das Live-Hörspiel „Pater Brown“ im Überblick. Tickets und Termine bei paterbrown.com.' },
   artikel: { path: '/hintergruende/was-ist-ein-live-hoerspiel/', title: 'Was ist ein Live-Hörspiel? Ablauf, Geräusche, Beispiel', desc: 'Ein Live-Hörspiel bringt das Hörspiel auf die Bühne: Stimmen, Geräusche und Musik entstehen vor Publikum. Ablauf, Unterschiede und ein Beispiel.' },
   ueber: { path: '/ueber-uns/', title: 'Über krimi.live – Betreiber und Team', desc: 'krimi.live ist das Magazin der Dream & Anchor Handelsgesellschaft mbH, Produzentin von „Pater Brown – Das Live-Hörspiel“. Team und Kontakt.' },
   impressum: { path: '/impressum/', title: 'Impressum – krimi.live', desc: 'Impressum von krimi.live, betrieben von der Dream & Anchor Handelsgesellschaft mbH.' },
-  datenschutz: { path: '/datenschutz/', title: 'Datenschutz – krimi.live', desc: 'Datenschutzerklärung von krimi.live: Hosting, cookielose Messung, keine Tracker.' },
+  datenschutz: { path: '/datenschutz/', title: 'Datenschutz – krimi.live', desc: 'Datenschutzerklärung von krimi.live: Hosting bei Cloudflare, keine Cookies, kein Tracking, Newsletter über Brevo mit Double-Opt-in.' },
 } satisfies Record<string, PageMeta>;

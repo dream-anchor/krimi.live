@@ -1,0 +1,19 @@
+---
+// Bühnenfoto mit srcset (Varianten -768, -1200, Original) und Pflicht-Credit.
+interface Props {
+  bild: { datei: string; breite: number; hoehe: number; alt: string; credit: string };
+  sizes?: string; ratio?: string; eager?: boolean; class?: string;
+}
+const { bild, sizes = '(min-width: 1248px) 1200px, 100vw', ratio, eager = false, class: cls } = Astro.props;
+const srcset = [[`${bild.datei}-768.webp`, 768], [`${bild.datei}-1200.webp`, 1200], [`${bild.datei}.webp`, bild.breite]].map(([u, w]) => `${u} ${w}w`).join(', ');
+---
+<figure class:list={['foto', cls]}>
+  <img src={`${bild.datei}-1200.webp`} srcset={srcset} sizes={sizes} width={bild.breite} height={bild.hoehe} alt={bild.alt}
+    loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : undefined} style={ratio ? `aspect-ratio:${ratio}` : undefined} />
+  <figcaption>{bild.credit}</figcaption>
+</figure>
+<style>
+.foto{margin:0}
+img{display:block;width:100%;height:auto;object-fit:cover;border-radius:var(--radius-lg);background:var(--surface-2)}
+figcaption{margin-top:var(--space-3);font:var(--fw-medium) 11px/1.4 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+</style>

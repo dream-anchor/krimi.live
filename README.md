@@ -13,24 +13,32 @@ npm run dev
 | Pfad | Datei | Besonderheit |
 | --- | --- | --- |
 | `/` | `src/pages/index.astro` | Feed-Block (3 Termine), FAQPage, TheaterEvent aus dem Feed |
-| `/formate/pater-brown/` | `src/pages/formate/pater-brown/index.astro` | Canonical → `https://paterbrown.com/live-hoerspiel/`, nicht in der Sitemap |
+| `/formate/<stück>/` | `src/pages/formate/[slug].astro` + `src/content/formate/<stück>.json` | eine Vorlage für alle Stücke; mit `links.canonical` nicht in der Sitemap |
 | `/hintergruende/was-ist-ein-live-hoerspiel/` | `…/index.astro` | Article (Datum aus Git), FAQPage (3 Fragen) |
 | `/ueber-uns/` · `/impressum/` · `/datenschutz/` | | Rechtstexte als Entwurf, „anwaltlich zu prüfen“ |
 
 ## Build-Variablen (Cloudflare Pages → Environment variables)
 | Variable | Standard | Zweck |
 | --- | --- | --- |
-| `TERMINE_FEED_URL` | `https://paterbrown.com/api/termine.json` | Terminfeed (Format: `docs/termine-feed.md`) |
+| `FEED_URL_<STÜCK>` | aus dem Datensatz (`feed.url`) | überschreibt den Feed eines Stücks, z. B. `FEED_URL_PATER_BROWN` (Format: `docs/termine-feed.md`) |
 | `SHOW_PRUEFEN` | `true` | `false` blendet die Prüfmarken aus – erst nach Klärung aller Punkte |
-| `ARTIKEL_AUTOR` | `offen` | `Antoine Monot` oder `Stefanie Sick`, sobald freigegeben |
+| `ARTIKEL_AUTOR` | `Stefanie Sick` | `Antoine Monot` oder `Stefanie Sick`, sobald freigegeben |
 | `FEED_VORSCHAU` | `false` | Platzhalterzeilen ohne Feed (nur Vorschau) |
+| `BREVO_API_KEY` | – (Secret) | Brevo-API-Schlüssel; ist er gesetzt, erscheint das Newsletter-Formular und `/api/newsletter` trägt per Double-Opt-in ein |
+| `BREVO_LIST_ID` / `BREVO_DOI_TEMPLATE_ID` | `11` / `8` | Brevo-Liste „krimi.live – Newsletter & Warteliste“ und DOI-Vorlage |
 
 Cloudflare Pages: Build-Befehl `npm run build`, Ausgabeordner `dist`. Täglicher Rebuild über einen Deploy Hook (Cron), damit der Feed-Block aktuell bleibt.
 
 `design/` enthält den Claude-Design-Export (Prototyp, Projektakte, Design System, Chat) als Referenz.
 
+## Ein neues Stück anlegen
+1. `src/content/formate/<stück>.json` nach dem Muster von `pater-brown.json` anlegen, `status: "angekuendigt"`. Jede Angabe belegen; Ungeprüftes in die `…pruefen`-Felder.
+2. Sobald es Termine gibt: `feed.url` eintragen, `status: "laeuft"`.
+3. Fertig. Startseite („Jetzt auf der Bühne“, gemischte Terminliste mit Stücktitel), Navigation, Footer, Sitemap und `/llms.txt` stellen sich beim nächsten Build selbst um.
+4. Spielt es nicht mehr: `status: "abgespielt"` – die Formatseite bleibt online, ohne Termine.
+
 ## Termine
-Kein Termin steht im Code. `src/lib/feed.ts` lädt den Feed einmal pro Build, filtert auf künftige Termine und sortiert sie. Ist der Feed nicht erreichbar, bricht der Build nicht ab: Der Block zeigt dann den Hinweis mit Link zu paterbrown.com/termine/, die Sätze mit Terminanzahl und Tourende entfallen, und es wird kein TheaterEvent erzeugt.
+Kein Termin steht im Code. `src/lib/feed.ts` lädt pro Stück den Feed einmal pro Build, filtert auf künftige Termine, sortiert und führt mehrere Stücke zusammen. Abgesagte Termine (`status`/`eventStatus` mit „Cancelled“) bleiben sichtbar markiert und gehen als `EventCancelled` ins Schema. Unter der Liste steht der Datenstand (`generated` aus dem Feed, sonst Abrufzeit). Ist der Feed nicht erreichbar, bricht der Build nicht ab: Der Block zeigt dann den Hinweis mit Link zu paterbrown.com/termine/, die Sätze mit Terminanzahl und Tourende entfallen, und es wird kein TheaterEvent erzeugt.
 
 ## Abweichungen vom Prototyp
 - Hash-Routen (`#/ueber-uns/`) → echte Pfade mit Schrägstrich am Ende.

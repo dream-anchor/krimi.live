@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Pruefen from '../../components/Pruefen.astro';
 import { META } from '../../data/meta';
 import { baseGraph, PERSONS } from '../../lib/schema';
 
@@ -15,9 +14,8 @@ const graph = [...baseGraph(meta), PERSONS.monot, PERSONS.mues, PERSONS.sick];
         <p class="lead text">krimi.live sammelt Wissen und Termine rund um Krimis auf der Bühne. Das Magazin gehört zur Dream &amp; Anchor Handelsgesellschaft mbH, die „Pater Brown – Das Live-Hörspiel“ produziert. Antoine Monot, Schauspieler, spielt die Titelrolle und ist Co-Produzent. Wanja Mues ist Erzähler und Flambeau. Künstlerische Leitung &amp; Creative Producerin: Stefanie Sick.</p>
         <div class="kontakt">
           <h2 class="overline overline--hl">Kontakt</h2>
-          <p class="k">Dream &amp; Anchor Handelsgesellschaft mbH<br /><span class="muted">Anschrift laut Impressum von paterbrown.com</span></p>
-          <p class="k">Telefon: <a href="tel:+49899090153943">+49 89 909015 3943</a></p>
-          <Pruefen label="Adresse, Kontakt" />
+          <p class="k">Dream &amp; Anchor Handelsgesellschaft mbH<br />Nördliche Münchner Straße 27a<br />82031 Grünwald</p>
+          <p class="k">Telefon: <a href="tel:+49899090153943">+49 89 909015 3943</a><br />E-Mail: <a href="mailto:hello@dream-anchor.com">hello@dream-anchor.com</a></p>
           <div class="links">
             <a href="https://paterbrown.com/">Pater Brown – Das Live-Hörspiel auf paterbrown.com</a>
             <a href="https://www.instagram.com/paterbrown.live/">Pater Brown auf Instagram</a>

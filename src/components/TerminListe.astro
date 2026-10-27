@@ -1,18 +1,35 @@
 ---
-// Feed-Block: die drei nächsten Termine aus dem Datenfeed, sonst Hinweis mit Link zu paterbrown.com/termine/.
+// Feed-Block: die nächsten Termine aus den Feeds der Stücke, sonst Hinweis mit Link zu den Terminseiten.
 import Button from './Button.astro';
+import Badge from './Badge.astro';
 import type { Feed } from '../lib/feed';
+import { standText } from '../lib/feed';
 import { FEED_VORSCHAU } from '../data/config';
-interface Props { feed: Feed; vorschau?: boolean }
-const { feed, vorschau = false } = Astro.props;
-const next3 = feed.ok ? feed.events.slice(0, 3) : [];
+interface Props {
+  feed: Feed;
+  quellen: string;          // „paterbrown.com“ bzw. „paterbrown.com und …“
+  anzahl?: number;
+  mitTitel?: boolean;       // ab zwei Stücken: Stücktitel als Overline je Zeile
+  vorschau?: boolean;
+}
+const { feed, quellen, anzahl = 3, mitTitel = false, vorschau = false } = Astro.props;
+const zeilen = feed.ok ? feed.events.slice(0, anzahl) : [];
 ---
 <div class="liste">
-  {next3.map(e => (
-    <div class="row">
-      <div class="when">{e.wd} {e.dt}<br />{e.t} Uhr</div>
-      <div class="where"><div class="city">{e.city}</div><div class="venue">{e.venue}</div></div>
-      <Button variant="secondary" size="md" href={e.url} iconEnd="arrow-up-right">Tickets<span class="sr-only"> für {e.city}, {e.dt}</span></Button>
+  {zeilen.map(e => (
+    <div class:list={['row', e.abgesagt && 'row--ab']}>
+      <div class="when">{e.wd} {e.dt}{e.t && <><br />{e.t} Uhr</>}</div>
+      <div class="where">
+        {mitTitel && <p class="overline overline--muted titel">{e.format.titel}</p>}
+        <div class="city">{e.city}</div>
+        <div class="venue">{e.venue}</div>
+      </div>
+      {e.abgesagt
+        ? <Badge>Abgesagt</Badge>
+        : <div class="act">
+            {e.verschoben && <Badge tone="highlight">Verschoben</Badge>}
+            <Button variant="secondary" size="md" href={e.url} iconEnd={e.url.startsWith('tel:') ? 'phone' : 'arrow-up-right'}>{e.url.startsWith('tel:') ? 'Tickets per Telefon' : 'Tickets'}<span class="sr-only"> für {e.city}, {e.dt}</span></Button>
+          </div>}
     </div>
   ))}
   {!feed.ok && vorschau && FEED_VORSCHAU && [1, 2, 3].map(() => (
@@ -22,15 +39,21 @@ const next3 = feed.ok ? feed.events.slice(0, 3) : [];
       <Button variant="secondary" size="md" disabled>Tickets</Button>
     </div>
   ))}
-  {!feed.ok && <p class="hinweis">Der Terminfeed ist gerade nicht erreichbar. Alle Vorstellungen mit Ticketlinks stehen auf paterbrown.com.</p>}
+  {!feed.ok && <p class="hinweis">Der Terminfeed ist gerade nicht erreichbar. Alle Vorstellungen mit Ticketlinks stehen auf {quellen}.</p>}
 </div>
+{feed.ok && <p class="overline overline--muted stand">Stand der Termine: {standText(feed.stand)} · Quelle: {quellen}</p>}
 <style>
 .liste{border-top:1px solid var(--border-default)}
 .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:20px 0;border-bottom:1px solid var(--border-default)}
 .when{flex:0 0 150px;font:var(--fw-medium) 14px/1.4 var(--font-mono);letter-spacing:.08em;color:var(--highlight)}
 .where{flex:1 1 200px;min-width:0}
+.titel{margin-bottom:6px}
 .city{font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase}
 .venue{margin-top:6px;font:var(--fw-regular) 15px/1.4 var(--font-sans);color:var(--text-2)}
+.act{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.row--ab .when,.row--ab .city,.row--ab .venue{color:var(--text-3)}
+.row--ab .city{text-decoration:line-through;text-decoration-thickness:2px}
 .row--ph .when,.row--ph .city,.row--ph .venue{color:var(--text-3)}
 .hinweis{margin:0;padding:20px 0;border-bottom:1px solid var(--border-default);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)}
+.stand{margin-top:var(--space-4)}
 </style>

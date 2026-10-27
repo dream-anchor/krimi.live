@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import { BASE } from '../data/config';
+interface Props { path: string; title: string; h1: string; text: string }
+const { path, title, h1, text } = Astro.props;
+const meta = { path, title, desc: text.slice(0, 150) };
+---
+<Base meta={meta} graph={[{ '@type': 'WebPage', '@id': BASE + path, url: BASE + path, name: title, isPartOf: { '@id': BASE + '/#site' } }]} noindex>
+  <section class="nlseite">
+    <div class="wrap">
+      <h1>{h1}</h1>
+      <p class="lead">{text}</p>
+      <p><a href="/" class="link-strong">Zur Startseite</a></p>
+    </div>
+  </section>
+</Base>
+<style>
+.nlseite{padding:clamp(40px,7vw,80px) 0 var(--space-10)}
+h1{margin:0 0 var(--space-6);font-family:var(--font-display);font-weight:900;font-size:clamp(48px,8vw,104px);line-height:.92;text-transform:uppercase}
+.lead{max-width:60ch;margin-bottom:var(--space-6)}
+</style>

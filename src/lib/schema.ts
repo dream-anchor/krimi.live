@@ -1,7 +1,8 @@
 import { BASE } from '../data/config';
 import type { PageMeta } from '../data/meta';
 import type { Faq } from '../data/faq';
-import type { Feed } from './feed';
+import type { Termin } from './feed';
+import type { Format } from './formate';
 
 // [PRÜFEN] sameAs-URLs exakt aus dem JSON-LD von paterbrown.com übernehmen
 export const PERSONS = {
@@ -10,8 +11,10 @@ export const PERSONS = {
   sick: { '@type': 'Person', '@id': BASE + '/#stefanie-sick', name: 'Stefanie Sick', jobTitle: 'Künstlerische Leitung & Creative Producerin' },
 };
 
-// [PRÜFEN] Sitz (München oder Grünwald) und Anschrift laut Impressum von paterbrown.com ergänzen
-const DREAM_ANCHOR = { '@type': 'Organization', '@id': BASE + '/#dream-anchor', name: 'Dream & Anchor Handelsgesellschaft mbH', telephone: '+49 89 909015 3943' };
+// Angaben laut Impressum von paterbrown.com; Sitz ist Grünwald (nie München)
+const DREAM_ANCHOR = { '@type': 'Organization', '@id': BASE + '/#dream-anchor', name: 'Dream & Anchor Handelsgesellschaft mbH',
+  telephone: '+49 89 909015 3943', email: 'hello@dream-anchor.com', vatID: 'DE320291075',
+  address: { '@type': 'PostalAddress', streetAddress: 'Nördliche Münchner Straße 27a', postalCode: '82031', addressLocality: 'Grünwald', addressCountry: 'DE' } };
 
 export function baseGraph(m: PageMeta): any[] {
   return [
@@ -28,15 +31,19 @@ export const faqPage = (m: PageMeta, faq: Faq[]) => ({
   mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 });
 
-/** TheaterEvent nur aus Feeddaten (die drei sichtbaren Termine). */
-export function theaterEvents(f: Feed) {
-  if (!f.ok) return [];
-  return f.events.slice(0, 3).map(e => {
-    const ev: any = { '@type': 'TheaterEvent', name: 'Pater Brown – Das Live-Hörspiel', startDate: e.startDate,
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', eventStatus: 'https://schema.org/EventScheduled',
+const PERSON_NACH_NAME = new Map(Object.values(PERSONS).map(p => [p.name, p]));
+const EVENT_STATUS = (e: Termin) => 'https://schema.org/' + (e.abgesagt ? 'EventCancelled' : e.verschoben ? 'EventPostponed' : 'EventScheduled');
+
+/** TheaterEvent nur aus Feeddaten, nur für die sichtbaren Termine. Ensemble aus dem Datensatz des Stücks. */
+export function theaterEvents(events: Termin[], formate: Format[]) {
+  const perf = new Map(formate.map(f => [f.id, f.data.ensemble.map(m => PERSON_NACH_NAME.get(m.name)).filter(Boolean)]));
+  return events.map(e => {
+    const ev: any = { '@type': 'TheaterEvent', name: e.format.titel, startDate: e.startDate,
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', eventStatus: EVENT_STATUS(e),
       location: { '@type': 'Place', name: e.venue, address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: e.country || undefined } },
-      performer: [PERSONS.monot, PERSONS.mues], organizer: { '@id': BASE + '/#dream-anchor' },
+      organizer: { '@id': BASE + '/#dream-anchor' },
       offers: { '@type': 'Offer', url: e.url } };
+    const p = perf.get(e.format.slug); if (p?.length) ev.performer = p;
     if (e.doorTime) ev.doorTime = e.doorTime;
     if (e.price != null && e.currency) { ev.offers.price = e.price; ev.offers.priceCurrency = e.currency; }
     return ev;
