@@ -1,0 +1,106 @@
+---
+import Base from '../../../layouts/Base.astro';
+import Button from '../../../components/Button.astro';
+import Pruefen from '../../../components/Pruefen.astro';
+import FaqListe from '../../../components/FaqListe.astro';
+import { META } from '../../../data/meta';
+import { FAQ_ARTIKEL } from '../../../data/faq';
+import { BASE, TERMINE_URL, ARTIKEL_AUTOR } from '../../../data/config';
+import { getFeed, platzhalter } from '../../../lib/feed';
+import { baseGraph, faqPage, PERSONS } from '../../../lib/schema';
+import { gitDates, deDatum } from '../../../lib/gitdate';
+
+const meta = META.artikel;
+const p = platzhalter(await getFeed());
+const dates = gitDates('src/pages/hintergruende/was-ist-ein-live-hoerspiel/index.astro');
+// [PRÜFEN] Autor: Freigabe der Namensnennung (ARTIKEL_AUTOR). Bis dahin „der Redaktion“, im Schema die Organisation.
+const author = ARTIKEL_AUTOR === 'Antoine Monot' ? PERSONS.monot : ARTIKEL_AUTOR === 'Stefanie Sick' ? PERSONS.sick : { '@id': BASE + '/#org' };
+const autorName = ARTIKEL_AUTOR === 'offen' ? 'der Redaktion' : ARTIKEL_AUTOR;
+const graph = [
+  ...baseGraph(meta),
+  faqPage(meta, FAQ_ARTIKEL),
+  { '@type': 'Article', '@id': BASE + meta.path + '#article', headline: 'Was ist ein Live-Hörspiel?', description: meta.desc, inLanguage: 'de-DE',
+    author, publisher: { '@id': BASE + '/#dream-anchor' }, mainEntityOfPage: { '@id': BASE + meta.path },
+    datePublished: dates.published, dateModified: dates.modified },
+];
+const abschnitte = [
+  { h: 'Was passiert auf der Bühne?', t: 'Die Sprecher tragen den Text als Dialog und Erzählung vor, am Mikrofon oder frei im Raum. Dazu kommen Geräusche wie Schritte, Türen, Wind und Regen sowie Musik. Sie führen das Publikum auch ohne Bilder an jeden Schauplatz der Handlung.' },
+  { h: 'Wie entstehen die Geräusche?', t: 'Klassisch macht das ein Geräuschemacher mit Requisiten. Bei „Pater Brown – Das Live-Hörspiel“ übernehmen das Beatboxer: Sie erzeugen alle Geräusche mit der Stimme und bauen sie mit einer Loop-Station zu Klangflächen auf, ohne Playback. Je nach Abend steht ein anderer Beatboxer auf der Bühne. Der Fall bleibt derselbe, der Klang ändert sich.' },
+  { h: 'Live-Hörspiel, Hörbuch und Theater im Vergleich', t: 'Beim Hörbuch liest meist eine Stimme vor. Das Live-Hörspiel verteilt die Rollen auf mehrere Sprecher und ergänzt Geräusche und Musik. Im Theater tragen Kulisse, Kostüm und Bewegung die Geschichte; das Live-Hörspiel setzt fast ganz auf Sprache und Klang. Ein aufgenommenes Hörspiel klingt immer gleich, ein Live-Hörspiel gibt es nur in diesem Moment, und jede Vorstellung klingt ein wenig anders.' },
+  { h: 'Für wen eignet sich ein Live-Hörspiel?', t: 'Für alle, die gern Krimis hören, lesen oder sehen und einmal erleben wollen, wie Spannung allein durch Stimmen entsteht. „Pater Brown“ ist ab etwa 12 Jahren empfohlen.' },
+];
+---
+<Base meta={meta} graph={graph}>
+  <article>
+    <header class="kopf">
+      <div class="wrap">
+        <nav aria-label="Brotkrumen" class="krumen overline"><a href="/">Start</a><span aria-hidden="true">·</span><span>Hintergründe</span></nav>
+        <h1>Was ist ein <span class="nowrap">Live-Hörspiel<span class="hl">?</span></span></h1>
+        <div class="byline">
+          <span>Von {autorName}</span>
+          <span>Veröffentlicht: <time datetime={dates.published}>{deDatum(dates.published)}</time></span>
+          <span>Aktualisiert: <time datetime={dates.modified}>{deDatum(dates.modified)}</time></span>
+          {ARTIKEL_AUTOR === 'offen' && <Pruefen label="Autor" block={false} />}
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap">
+      <div class="kurz">
+        <p class="overline overline--hl kurz__l">Kurz gesagt</p>
+        <p class="kurz__t">Ein Live-Hörspiel ist ein Hörspiel, das vor Publikum auf der Bühne entsteht. Schauspieler sprechen die Rollen, Geräusche und Musik werden im selben Moment erzeugt. Die Bilder entstehen im Kopf der Zuschauer, wie beim Radiohören, nur dass man den Sprechern dabei zusehen kann.</p>
+      </div>
+    </div>
+
+    <div class="wrap korpus">
+      <div class="korpus__rand"></div>
+      <div class="korpus__text">
+        {abschnitte.map(a => <section><h2 class="ah2">{a.h}</h2><p class="fliess">{a.t}</p></section>)}
+        <section class="beispiel">
+          <p class="overline overline--hl bsp__l">Beispiel</p>
+          <h2 class="ah2">Beispiel: „Pater Brown – Das Live-Hörspiel“</h2>
+          <p class="fliess bsp__t">Antoine Monot spielt Pater Brown, Wanja Mues ist Erzähler und Flambeau. An einem Abend laufen zwei Fälle nach G. K. Chesterton: „Das blaue Kreuz“ und „Die fallenden Brüder“. Die Vorstellung dauert etwa zwei Stunden einschließlich Pause.{p && ` Die Tour läuft bis ${p.letzter_termin_monat_jahr}.`}</p>
+          <div class="btns">
+            <Button variant="primary" size="lg" href={TERMINE_URL} iconEnd="arrow-up-right">Termine und Tickets</Button>
+            <Button variant="secondary" size="lg" href="/formate/pater-brown/">Das Format im Überblick</Button>
+          </div>
+        </section>
+        <section>
+          <h2 class="ah2">Häufige Fragen</h2>
+          <FaqListe items={FAQ_ARTIKEL} />
+        </section>
+        <section class="mehr">
+          <h2 class="overline overline--muted mehr__h">Mehr dazu auf paterbrown.com</h2>
+          <div class="mehr__l">
+            <a href="https://paterbrown.com/hintergruende/krimi-hoerspiel/">Die Geschichte des Krimi-Hörspiels</a>
+            <a href="https://paterbrown.com/hintergruende/krimi-events/">Krimidinner, Escape Room, Krimiwanderung und Live-Hörspiel im Vergleich</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+</Base>
+<style>
+.kopf{padding:clamp(40px,7vw,80px) 0 var(--space-8)}
+.krumen{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-6);color:var(--text-3)}
+.krumen a{color:var(--text-3)}
+h1{margin:0;max-width:14ch;font-family:var(--font-display);font-weight:900;font-size:clamp(60px,11vw,150px);line-height:.96;hyphens:manual;letter-spacing:-.01em;text-transform:uppercase}
+.nowrap{white-space:nowrap}
+.hl{color:var(--highlight)}
+.byline{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:var(--space-6);font:var(--fw-medium) 13px/1.4 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)}
+.kurz{padding:var(--space-7) 0;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-8)}
+.kurz__l{flex:1 1 180px}
+.kurz__t{flex:999 1 560px;min-width:0;margin:0;font:var(--fw-regular) clamp(21px,2.6vw,30px)/1.4 var(--font-sans);color:var(--text-1);text-wrap:pretty}
+.korpus{padding-top:var(--space-8);display:flex;flex-wrap:wrap;gap:0 var(--space-8)}
+.korpus__rand{flex:1 1 180px}
+.korpus__text{flex:999 1 560px;min-width:0;max-width:720px;display:flex;flex-direction:column;gap:var(--space-8)}
+.ah2{margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase}
+.fliess{margin:0;font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty}
+.beispiel{padding:var(--space-7);background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)}
+.bsp__l{margin-bottom:var(--space-3)}
+.bsp__t{margin-bottom:var(--space-6)}
+.mehr{padding-bottom:var(--space-9)}
+.mehr__h{margin-bottom:var(--space-4)}
+.mehr__l{display:flex;flex-direction:column;gap:var(--space-4)}
+.mehr__l a{font:var(--fw-semibold) var(--fs-body-l)/1.4 var(--font-sans)}
+</style>

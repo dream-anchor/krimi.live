@@ -1,0 +1,36 @@
+---
+// Feed-Block: die drei nächsten Termine aus dem Datenfeed, sonst Hinweis mit Link zu paterbrown.com/termine/.
+import Button from './Button.astro';
+import type { Feed } from '../lib/feed';
+import { FEED_VORSCHAU } from '../data/config';
+interface Props { feed: Feed; vorschau?: boolean }
+const { feed, vorschau = false } = Astro.props;
+const next3 = feed.ok ? feed.events.slice(0, 3) : [];
+---
+<div class="liste">
+  {next3.map(e => (
+    <div class="row">
+      <div class="when">{e.wd} {e.dt}<br />{e.t} Uhr</div>
+      <div class="where"><div class="city">{e.city}</div><div class="venue">{e.venue}</div></div>
+      <Button variant="secondary" size="md" href={e.url} iconEnd="arrow-up-right">Tickets<span class="sr-only"> für {e.city}, {e.dt}</span></Button>
+    </div>
+  ))}
+  {!feed.ok && vorschau && FEED_VORSCHAU && [1, 2, 3].map(() => (
+    <div class="row row--ph" aria-hidden="true">
+      <div class="when">WT TT.MM.JJJJ<br />HH:MM Uhr</div>
+      <div class="where"><div class="city">Stadt aus Feed</div><div class="venue">Spielstätte aus Feed</div></div>
+      <Button variant="secondary" size="md" disabled>Tickets</Button>
+    </div>
+  ))}
+  {!feed.ok && <p class="hinweis">Der Terminfeed ist gerade nicht erreichbar. Alle Vorstellungen mit Ticketlinks stehen auf paterbrown.com.</p>}
+</div>
+<style>
+.liste{border-top:1px solid var(--border-default)}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:20px 0;border-bottom:1px solid var(--border-default)}
+.when{flex:0 0 150px;font:var(--fw-medium) 14px/1.4 var(--font-mono);letter-spacing:.08em;color:var(--highlight)}
+.where{flex:1 1 200px;min-width:0}
+.city{font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase}
+.venue{margin-top:6px;font:var(--fw-regular) 15px/1.4 var(--font-sans);color:var(--text-2)}
+.row--ph .when,.row--ph .city,.row--ph .venue{color:var(--text-3)}
+.hinweis{margin:0;padding:20px 0;border-bottom:1px solid var(--border-default);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)}
+</style>

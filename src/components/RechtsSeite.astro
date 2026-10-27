@@ -1,0 +1,21 @@
+---
+import Badge from './Badge.astro';
+interface Props { title: string; intro: string }
+const { title, intro } = Astro.props;
+---
+<section class="recht">
+  <div class="recht__in">
+    <!-- Immer sichtbar, unabhängig von SHOW_PRUEFEN: ohne Freigabe nicht live gehen. -->
+    <div class="marke"><Badge tone="highlight">Entwurf · anwaltlich zu prüfen</Badge></div>
+    <h1>{title}</h1>
+    <p class="body intro">{intro}</p>
+    <slot />
+  </div>
+</section>
+<style>
+.recht{padding:clamp(40px,7vw,80px) 0 var(--space-9)}
+.recht__in{max-width:880px;margin:0 auto;padding:0 var(--gutter)}
+.marke{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-5)}
+h1{margin:0 0 var(--space-7);font-family:var(--font-display);font-weight:900;font-size:clamp(56px,9vw,112px);line-height:.88;text-transform:uppercase}
+.intro{margin-bottom:var(--space-6)}
+</style>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/tokens/colors.css">
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/tokens/typography.css">
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/tokens/effects.css">
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/tokens/base.css">
+<link rel="stylesheet" href="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/styles.css">
+<script src="_ds/krimi-live-design-system-fc12d85c-37d6-47ac-ab16-7426ee972b9b/_ds_bundle.js"></script>
+<style>
+html,body{margin:0;background:var(--bg-page);color:var(--text-1);-webkit-font-smoothing:antialiased}
+a{color:var(--text-1);text-decoration-color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:var(--accent-hover)}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:6px}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--bg-page);font-family:var(--font-sans);color:var(--text-1)">
+
+<header style="position:sticky;top:0;z-index:10;background:rgba(11,10,9,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border-subtle)">
+  <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);min-height:72px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px">
+    <a href="#/" aria-label="krimi.live – Startseite" style="font-family:var(--font-display);font-weight:900;font-size:30px;line-height:1;text-transform:uppercase;letter-spacing:-.01em;text-decoration:none;color:var(--text-1);padding:8px 0">Krimi<span style="color:var(--accent)">.</span>live</a>
+    <nav aria-label="Hauptnavigation" style="display:flex;flex-wrap:wrap;align-items:center;gap:4px 20px;margin-left:auto">
+      <a href="#/formate/pater-brown/" style="font:var(--fw-medium) 15px/1 var(--font-sans);text-decoration:none;padding:12px 0">Format</a>
+      <a href="#/hintergruende/was-ist-ein-live-hoerspiel/" style="font:var(--fw-medium) 15px/1 var(--font-sans);text-decoration:none;padding:12px 0">Hintergründe</a>
+      <a href="#/ueber-uns/" style="font:var(--fw-medium) 15px/1 var(--font-sans);text-decoration:none;padding:12px 0">Über uns</a>
+      <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="primary" size="sm" href="https://paterbrown.com/termine/" icon-end="arrow-up-right" hint-size="110px,36px">Tickets</x-import>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ STARTSEITE ============ -->
+<sc-if value="{{ isStart }}" hint-placeholder-val="{{ true }}">
+  <section style="padding:clamp(40px,7vw,88px) 0 var(--space-9)">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--space-7) var(--space-8)">
+      <div style="flex:1 1 520px;min-width:0">
+        <p style="margin:0 0 var(--space-5);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--highlight)">Magazin · Krimis auf der Bühne</p>
+        <h1 style="margin:0;font-family:var(--font-display);font-weight:900;font-size:clamp(76px,17vw,224px);line-height:.84;letter-spacing:-.01em;text-transform:uppercase;color:var(--text-1)"><span style="display:block">Krimi</span> <span style="display:block;color:var(--highlight)">live</span> <span style="display:block">erleben</span></h1>
+      </div>
+      <div style="flex:0 1 440px;min-width:0;padding-bottom:var(--space-3)">
+        <p style="margin:0 0 var(--space-6);font:var(--fw-regular) clamp(18px,2vw,21px)/1.5 var(--font-sans);color:var(--text-1);text-wrap:pretty">krimi.live ist das Magazin für Krimis, die auf der Bühne entstehen: Live-Hörspiele, Stimmen, Geräusche und Spannung im selben Raum. Im Mittelpunkt steht derzeit „Pater Brown – Das Live-Hörspiel“ mit Antoine Monot und Wanja Mues, auf Tour durch Deutschland und die Schweiz.</p>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="primary" size="lg" href="https://paterbrown.com/termine/" icon-end="arrow-up-right" hint-size="200px,56px">Tickets &amp; Termine</x-import>
+          <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="secondary" size="lg" href="#/formate/pater-brown/" hint-size="170px,56px">Zum Format</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-termine" style="border-top:1px solid var(--border-subtle);padding:var(--space-9) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <div style="flex:1 1 280px;min-width:0">
+        <h2 id="h-termine" style="margin:0 0 var(--space-5);font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.08;text-transform:uppercase">Die nächsten Termine</h2>
+        <p style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2);text-wrap:pretty">Die nächsten Vorstellungen von „Pater Brown – Das Live-Hörspiel“. <sc-if value="{{ feedOk }}" hint-placeholder-val="{{ false }}">Alle {{ termineAnzahl }} Termine bis {{ tourBis }} mit Ticketlinks stehen auf <a href="https://paterbrown.com/termine/">paterbrown.com</a>.</sc-if><sc-if value="{{ feedNotOk }}" hint-placeholder-val="{{ true }}">Alle Termine mit Ticketlinks stehen auf <a href="https://paterbrown.com/termine/">paterbrown.com</a>.</sc-if></p>
+      </div>
+      <div style="flex:999 1 560px;min-width:0">
+        <div style="border-top:1px solid var(--border-default)">
+          <sc-if value="{{ feedOk }}" hint-placeholder-val="{{ false }}">
+            <sc-for list="{{ next3 }}" as="e" hint-placeholder-count="3">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:20px 0;border-bottom:1px solid var(--border-default)">
+                <div style="flex:0 0 150px;font:var(--fw-medium) 14px/1.4 var(--font-mono);letter-spacing:.08em;color:var(--highlight)">{{ e.wd }} {{ e.dt }}<br>{{ e.t }} Uhr</div>
+                <div style="flex:1 1 200px;min-width:0"><div style="font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase">{{ e.city }}</div><div style="margin-top:6px;font:var(--fw-regular) 15px/1.4 var(--font-sans);color:var(--text-2)">{{ e.venue }}</div></div>
+                <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="secondary" size="md" href="{{ e.url }}" icon-end="arrow-up-right" hint-size="120px,44px">Tickets</x-import>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{ feedLoading }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0;padding:24px 0;border-bottom:1px solid var(--border-default);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Termine werden geladen …</p>
+          </sc-if>
+          <sc-if value="{{ feedFailed }}" hint-placeholder-val="{{ true }}">
+            <sc-if value="{{ vorschau }}" hint-placeholder-val="{{ false }}">
+              <sc-for list="{{ platzhalterZeilen }}" as="p" hint-placeholder-count="3">
+                <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:20px 0;border-bottom:1px solid var(--border-default)">
+                  <div style="flex:0 0 150px;font:var(--fw-medium) 14px/1.4 var(--font-mono);letter-spacing:.08em;color:var(--text-3)">WT TT.MM.JJJJ<br>HH:MM Uhr</div>
+                  <div style="flex:1 1 200px;min-width:0"><div style="font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;color:var(--text-3)">Stadt aus Feed</div><div style="margin-top:6px;font:var(--fw-regular) 15px/1.4 var(--font-sans);color:var(--text-3)">Spielstätte aus Feed</div></div>
+                  <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="secondary" size="md" disabled="{{ true }}" hint-size="120px,44px">Tickets</x-import>
+                </div>
+              </sc-for>
+            </sc-if>
+            <p style="margin:0;padding:20px 0;border-bottom:1px solid var(--border-default);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Der Terminfeed ist gerade nicht erreichbar. Alle Vorstellungen mit Ticketlinks stehen auf paterbrown.com.</p>
+          </sc-if>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--space-6)">
+          <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="primary" size="lg" href="https://paterbrown.com/termine/" icon-end="arrow-up-right" hint-size="190px,56px">Alle Termine</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-format" style="border-top:1px solid var(--border-subtle);padding:var(--space-9) 0;background:var(--surface-1)">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8);align-items:flex-start">
+      <div style="flex:1 1 280px;min-width:0">
+        <p style="margin:0 0 var(--space-4);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Pater Brown – Das Live-Hörspiel</p>
+        <h2 id="h-format" style="margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.08;text-transform:uppercase">Das Format der Saison</h2>
+      </div>
+      <div style="flex:999 1 560px;min-width:0">
+        <p style="margin:0 0 var(--space-6);font:var(--fw-regular) clamp(18px,2vw,22px)/1.5 var(--font-sans);color:var(--text-1);max-width:62ch;text-wrap:pretty">Zwei Schauspieler sprechen alle Rollen. Beatboxer erzeugen sämtliche Geräusche live mit Stimme und Loop-Station, ohne Playback. Pro Abend gibt es zwei Fälle nach G. K. Chesterton, in etwa zwei Stunden inklusive Pause.</p>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+          <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="secondary" size="lg" href="#/formate/pater-brown/" hint-size="170px,56px">Zum Format</x-import>
+          <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="primary" size="lg" href="https://paterbrown.com/termine/" icon-end="arrow-up-right" hint-size="200px,56px">Tickets &amp; Termine</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-hg" style="border-top:1px solid var(--border-subtle);padding:var(--space-9) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <div style="flex:1 1 280px;min-width:0">
+        <h2 id="h-hg" style="margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.08;text-transform:uppercase">Hintergründe</h2>
+      </div>
+      <div style="flex:999 1 560px;min-width:0">
+        <a href="#/hintergruende/was-ist-ein-live-hoerspiel/" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--space-5) var(--space-7);padding:var(--space-7);background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-1);transition:transform var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out)" style-hover="transform:translateY(-2px);border-color:var(--border-strong);box-shadow:var(--shadow-2);color:var(--text-1)">
+          <div style="flex:1 1 320px;min-width:0">
+            <p style="margin:0 0 var(--space-4);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--highlight)">Kernartikel</p>
+            <h3 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:900;font-size:clamp(40px,6vw,72px);line-height:1;text-transform:uppercase">Was ist ein Live-Hörspiel?</h3>
+            <p style="margin:0;font:var(--fw-regular) var(--fs-body-l)/var(--lh-body) var(--font-sans);color:var(--text-2);text-wrap:pretty">Wie ein Hörspiel auf die Bühne kommt, wer die Geräusche macht und was das Publikum davon hat.</p>
+          </div>
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);flex:0 0 auto"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Icon" name="arrow-right" size="{{ 24 }}" hint-size="24px,24px"></x-import></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-wer" style="border-top:1px solid var(--border-subtle);padding:var(--space-9) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <div style="flex:1 1 280px;min-width:0">
+        <h2 id="h-wer" style="margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.08;text-transform:uppercase">Wer hinter krimi.live steht</h2>
+      </div>
+      <div style="flex:999 1 560px;min-width:0">
+        <p style="margin:0 0 var(--space-5);font:var(--fw-regular) var(--fs-body-l)/var(--lh-body) var(--font-sans);color:var(--text-2);max-width:62ch;text-wrap:pretty">krimi.live wird von der Dream &amp; Anchor Handelsgesellschaft mbH betrieben, die auch „Pater Brown – Das Live-Hörspiel“ produziert. Das Magazin schreibt aus der Praxis, von Menschen, die Live-Hörspiele selbst auf die Bühne bringen.</p>
+        <a href="#/ueber-uns/" style="font:var(--fw-semibold) var(--fs-body)/1.4 var(--font-sans);text-decoration:underline">Betreiber, Team und Kontakt</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-faq" style="border-top:1px solid var(--border-subtle);padding:var(--space-9) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)">
+      <h2 id="h-faq" style="margin:0 0 var(--space-7);font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,56px);line-height:1.08;text-transform:uppercase">Häufige Fragen</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:0 var(--space-8)">
+        <div data-faq="" style="padding:var(--space-6) 0;border-top:1px solid var(--border-default)">
+          <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans);color:var(--text-1)">Was ist ein Live-Hörspiel?</h3>
+          <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2);text-wrap:pretty">Ein Live-Hörspiel führt ein Hörspiel vor Publikum auf der Bühne auf. Schauspieler sprechen die Rollen, Geräusche und Musik entstehen im selben Moment. Bei „Pater Brown“ erzeugen Beatboxer alle Geräusche live mit Stimme und Loop-Station, ohne Playback.</p>
+        </div>
+        <div data-faq="" style="padding:var(--space-6) 0;border-top:1px solid var(--border-default)">
+          <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans);color:var(--text-1)">Wie lange dauert „Pater Brown – Das Live-Hörspiel“?</h3>
+          <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Etwa zwei Stunden, einschließlich 15 Minuten Pause.</p>
+        </div>
+        <div data-faq="" style="padding:var(--space-6) 0;border-top:1px solid var(--border-default)">
+          <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans);color:var(--text-1)">Welche Geschichten werden gespielt?</h3>
+          <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Pro Abend zwei Fälle nach G. K. Chesterton: „Das blaue Kreuz“ und „Die fallenden Brüder“.</p>
+          <sc-if value="{{ pruefen }}" hint-placeholder-val="{{ true }}"><div style="margin-top:var(--space-3)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="150px,24px">Prüfen · Programm</x-import></div></sc-if>
+        </div>
+        <div data-faq="" style="padding:var(--space-6) 0;border-top:1px solid var(--border-default)">
+          <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans);color:var(--text-1)">Wer steht auf der Bühne?</h3>
+          <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2);text-wrap:pretty">Antoine Monot spielt Pater Brown, Wanja Mues ist Erzähler und Flambeau. Je nach Abend sorgt ein Beatboxer (Marvelin, Hans Beatbox oder Eyota) für den Klang.</p>
+        </div>
+        <div data-faq="" style="padding:var(--space-6) 0;border-top:1px solid var(--border-default)">
+          <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans);color:var(--text-1)">Ab welchem Alter ist die Vorstellung geeignet?</h3>
+          <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Empfohlen ab etwa 12 Jahren.</p>
+        </div>
+        <div data-faq="" style="padding:var(--space-6) 0;border-top:1px solid var(--border-default)">
+          <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans);color:var(--text-1)">Was kosten Tickets, und wo gibt es sie?</h3>
+          <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2);text-wrap:pretty">Tickets gibt es ab 35,40 € in Deutschland und ab CHF 65,40 in der Schweiz. Die Ticketlinks stehen bei den Terminen auf paterbrown.com.</p>
+          <sc-if value="{{ pruefen }}" hint-placeholder-val="{{ true }}"><div style="margin-top:var(--space-3)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="130px,24px">Prüfen · Preise</x-import></div></sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ============ FORMATSEITE ============ -->
+<sc-if value="{{ isFormat }}" hint-placeholder-val="{{ false }}">
+  <section style="padding:clamp(40px,7vw,88px) 0 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)">
+      <p style="margin:0 0 var(--space-5);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--highlight)">Format · Live-Hörspiel · auf Tour</p>
+      <h1 style="margin:0;font-family:var(--font-display);font-weight:900;font-size:clamp(68px,14vw,184px);line-height:.84;letter-spacing:-.01em;text-transform:uppercase"><span style="display:block">Pater Brown</span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> – </span><span style="display:block;margin-top:.12em;font-weight:700;font-size:.34em;line-height:1;color:var(--text-2)">Das Live-Hörspiel</span></h1>
+      <div style="margin-top:var(--space-8);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));border-top:1px solid var(--border-default)">
+        <div style="padding:var(--space-6) var(--space-6) var(--space-6) 0;border-bottom:1px solid var(--border-default)">
+          <p style="margin:0 0 var(--space-3);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Fall 1</p>
+          <p style="margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1.02;text-transform:uppercase">„Das blaue Kreuz“</p>
+        </div>
+        <div style="padding:var(--space-6) var(--space-6) var(--space-6) 0;border-bottom:1px solid var(--border-default)">
+          <p style="margin:0 0 var(--space-3);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Fall 2</p>
+          <p style="margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1.02;text-transform:uppercase">„Die fallenden Brüder“</p>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:var(--space-4) 0">
+        <span style="font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Nach G. K. Chesterton · zwei Fälle an einem Abend</span>
+        <sc-if value="{{ pruefen }}" hint-placeholder-val="{{ true }}"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="150px,24px">Prüfen · Programm</x-import></sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-worum" style="padding:var(--space-9) 0 var(--space-8)">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <h2 id="f-worum" style="flex:1 1 280px;margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(32px,4vw,48px);line-height:var(--lh-heading);text-transform:uppercase">Worum es geht</h2>
+      <p style="flex:999 1 560px;min-width:0;margin:0;font:var(--fw-regular) clamp(18px,2vw,21px)/1.55 var(--font-sans);color:var(--text-1);text-wrap:pretty">Pater Brown, der unscheinbare Pfarrer aus den Kriminalgeschichten von G. K. Chesterton, löst seine Fälle durch Menschenkenntnis statt durch Spurensicherung. Im Live-Hörspiel erleben Zuschauer zwei dieser Fälle an einem Abend, nur mit Stimme, Geräusch und Fantasie.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-stimmen" style="border-top:1px solid var(--border-subtle);padding:var(--space-8) 0;background:var(--surface-1)">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <h2 id="f-stimmen" style="flex:1 1 280px;margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(32px,4vw,48px);line-height:var(--lh-heading);text-transform:uppercase">Die Stimmen des Abends</h2>
+      <div style="flex:999 1 560px;min-width:0">
+        <dl style="margin:0;border-top:1px solid var(--border-default)">
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 24px;padding:var(--space-5) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 260px;font-family:var(--font-display);font-weight:800;font-size:34px;line-height:1;text-transform:uppercase">Antoine Monot</dt><dd style="flex:1 1 220px;margin:0;font:var(--fw-medium) 13px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)">Pater Brown · Co-Produzent</dd></div>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 24px;padding:var(--space-5) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 260px;font-family:var(--font-display);font-weight:800;font-size:34px;line-height:1;text-transform:uppercase">Wanja Mues</dt><dd style="flex:1 1 220px;margin:0;font:var(--fw-medium) 13px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)">Erzähler und Flambeau</dd></div>
+          <div style="display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 24px;padding:var(--space-5) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 260px;font-family:var(--font-display);font-weight:800;font-size:34px;line-height:1;text-transform:uppercase">Marvelin · Hans Beatbox · Eyota</dt><dd style="flex:1 1 220px;margin:0;font:var(--fw-medium) 13px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)">Beatbox, je nach Abend</dd></div>
+        </dl>
+        <p style="margin:var(--space-5) 0 0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Beide Schauspieler kennt das Fernsehpublikum aus „Ein Fall für zwei“ (ZDF).</p>
+        <sc-if value="{{ pruefen }}" hint-placeholder-val="{{ true }}"><div style="margin-top:var(--space-3)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="150px,24px">Prüfen · TV-Bezug</x-import></div></sc-if>
+        <p style="margin:var(--space-5) 0 0;font:var(--fw-semibold) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-1)">Künstlerische Leitung &amp; Creative Producerin: Stefanie Sick</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-ablauf" style="border-top:1px solid var(--border-subtle);padding:var(--space-8) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <h2 id="f-ablauf" style="flex:1 1 280px;margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(32px,4vw,48px);line-height:var(--lh-heading);text-transform:uppercase">Ablauf und Dauer</h2>
+      <div style="flex:999 1 560px;min-width:0">
+        <p style="margin:0;font:var(--fw-regular) clamp(18px,2vw,21px)/1.55 var(--font-sans);color:var(--text-1);text-wrap:pretty">Etwa zwei Stunden inklusive 15 Minuten Pause, ohne Kostümwechsel und ohne Bühnenbild. Empfohlen ab etwa 12 Jahren.</p>
+        <sc-if value="{{ pruefen }}" hint-placeholder-val="{{ true }}"><div style="margin-top:var(--space-3)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="160px,24px">Prüfen · Bühnenbild</x-import></div></sc-if>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-termine" style="border-top:1px solid var(--border-subtle);padding:var(--space-8) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+      <h2 id="f-termine" style="flex:1 1 280px;margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(32px,4vw,48px);line-height:var(--lh-heading);text-transform:uppercase">Termine und Tickets</h2>
+      <div style="flex:999 1 560px;min-width:0">
+        <div style="border-top:1px solid var(--border-default)">
+          <sc-if value="{{ feedOk }}" hint-placeholder-val="{{ false }}">
+            <sc-for list="{{ next3 }}" as="e" hint-placeholder-count="3">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px 24px;padding:20px 0;border-bottom:1px solid var(--border-default)">
+                <div style="flex:0 0 150px;font:var(--fw-medium) 14px/1.4 var(--font-mono);letter-spacing:.08em;color:var(--highlight)">{{ e.wd }} {{ e.dt }}<br>{{ e.t }} Uhr</div>
+                <div style="flex:1 1 200px;min-width:0"><div style="font-family:var(--font-display);font-weight:800;font-size:30px;line-height:1;text-transform:uppercase">{{ e.city }}</div><div style="margin-top:6px;font:var(--fw-regular) 15px/1.4 var(--font-sans);color:var(--text-2)">{{ e.venue }}</div></div>
+                <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="secondary" size="md" href="{{ e.url }}" icon-end="arrow-up-right" hint-size="120px,44px">Tickets</x-import>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{ feedLoading }}" hint-placeholder-val="{{ false }}">
+            <p style="margin:0;padding:24px 0;border-bottom:1px solid var(--border-default);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Termine werden geladen …</p>
+          </sc-if>
+          <sc-if value="{{ feedFailed }}" hint-placeholder-val="{{ true }}">
+            <p style="margin:0;padding:20px 0;border-bottom:1px solid var(--border-default);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Der Terminfeed ist gerade nicht erreichbar. Alle Vorstellungen mit Ticketlinks stehen auf paterbrown.com.</p>
+          </sc-if>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--space-6)">
+          <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="primary" size="lg" href="https://paterbrown.com/termine/" icon-end="arrow-up-right" hint-size="260px,56px">Alle Termine und Tickets</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid var(--border-subtle);padding:var(--space-8) 0">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-7);align-items:center">
+      <a href="https://paterbrown.com/live-hoerspiel/" style="font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.4vw,40px);line-height:1.05;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:2px">Mehr zur Show, zum Ensemble und zur Presse bei paterbrown.com</a>
+      <a href="#/hintergruende/was-ist-ein-live-hoerspiel/" style="font:var(--fw-semibold) var(--fs-body)/1.4 var(--font-sans)">Hintergrund: Was ist ein Live-Hörspiel?</a>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ============ KERNARTIKEL ============ -->
+<sc-if value="{{ isArtikel }}" hint-placeholder-val="{{ false }}">
+  <article>
+    <header style="padding:clamp(40px,7vw,80px) 0 var(--space-8)">
+      <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)">
+        <nav aria-label="Brotkrumen" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-6);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)"><a href="#/" style="color:var(--text-3)">Start</a><span>·</span><span>Hintergründe</span></nav>
+        <h1 style="margin:0;max-width:14ch;font-family:var(--font-display);font-weight:900;font-size:clamp(60px,11vw,150px);line-height:.96;hyphens:manual;letter-spacing:-.01em;text-transform:uppercase">Was ist ein <span style="white-space:nowrap">Live-Hörspiel<span style="color:var(--highlight)">?</span></span></h1>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:var(--space-6);font:var(--fw-medium) 13px/1.4 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-2)">
+          <span>Von {{ autorName }}</span>
+          <span>Veröffentlicht: Datum aus dem Build</span>
+          <span>Aktualisiert: Datum aus dem Build</span>
+          <sc-if value="{{ autorPruefen }}" hint-placeholder-val="{{ true }}"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="130px,24px">Prüfen · Autor</x-import></sc-if>
+        </div>
+      </div>
+    </header>
+
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)">
+      <div style="padding:var(--space-7) 0;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-8)">
+        <p style="flex:1 1 180px;margin:0;font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--highlight)">Kurz gesagt</p>
+        <p style="flex:999 1 560px;min-width:0;margin:0;font:var(--fw-regular) clamp(21px,2.6vw,30px)/1.4 var(--font-sans);color:var(--text-1);text-wrap:pretty">Ein Live-Hörspiel ist ein Hörspiel, das vor Publikum auf der Bühne entsteht. Schauspieler sprechen die Rollen, Geräusche und Musik werden im selben Moment erzeugt. Die Bilder entstehen im Kopf der Zuschauer, wie beim Radiohören, nur dass man den Sprechern dabei zusehen kann.</p>
+      </div>
+    </div>
+
+    <div style="max-width:var(--container-max);margin:0 auto;padding:var(--space-8) var(--gutter) 0;display:flex;flex-wrap:wrap;gap:0 var(--space-8)">
+      <div style="flex:1 1 180px"></div>
+      <div style="flex:999 1 560px;min-width:0;max-width:720px;display:flex;flex-direction:column;gap:var(--space-8)">
+        <section>
+          <h2 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase">Was passiert auf der Bühne?</h2>
+          <p style="margin:0;font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty">Die Sprecher tragen den Text als Dialog und Erzählung vor, am Mikrofon oder frei im Raum. Dazu kommen Geräusche wie Schritte, Türen, Wind und Regen sowie Musik. Sie führen das Publikum auch ohne Bilder an jeden Schauplatz der Handlung.</p>
+        </section>
+        <section>
+          <h2 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase">Wie entstehen die Geräusche?</h2>
+          <p style="margin:0;font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty">Klassisch macht das ein Geräuschemacher mit Requisiten. Bei „Pater Brown – Das Live-Hörspiel“ übernehmen das Beatboxer: Sie erzeugen alle Geräusche mit der Stimme und bauen sie mit einer Loop-Station zu Klangflächen auf, ohne Playback. Je nach Abend steht ein anderer Beatboxer auf der Bühne. Der Fall bleibt derselbe, der Klang ändert sich.</p>
+        </section>
+        <section>
+          <h2 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase">Live-Hörspiel, Hörbuch und Theater im Vergleich</h2>
+          <p style="margin:0;font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty">Beim Hörbuch liest meist eine Stimme vor. Das Live-Hörspiel verteilt die Rollen auf mehrere Sprecher und ergänzt Geräusche und Musik. Im Theater tragen Kulisse, Kostüm und Bewegung die Geschichte; das Live-Hörspiel setzt fast ganz auf Sprache und Klang. Ein aufgenommenes Hörspiel klingt immer gleich, ein Live-Hörspiel gibt es nur in diesem Moment, und jede Vorstellung klingt ein wenig anders.</p>
+        </section>
+        <section>
+          <h2 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase">Für wen eignet sich ein Live-Hörspiel?</h2>
+          <p style="margin:0;font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty">Für alle, die gern Krimis hören, lesen oder sehen und einmal erleben wollen, wie Spannung allein durch Stimmen entsteht. „Pater Brown“ ist ab etwa 12 Jahren empfohlen.</p>
+        </section>
+        <section style="padding:var(--space-7);background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)">
+          <p style="margin:0 0 var(--space-3);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--highlight)">Beispiel</p>
+          <h2 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase">Beispiel: „Pater Brown – Das Live-Hörspiel“</h2>
+          <p style="margin:0 0 var(--space-6);font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty">Antoine Monot spielt Pater Brown, Wanja Mues ist Erzähler und Flambeau. An einem Abend laufen zwei Fälle nach G. K. Chesterton: „Das blaue Kreuz“ und „Die fallenden Brüder“. Die Vorstellung dauert etwa zwei Stunden einschließlich Pause.<sc-if value="{{ feedOk }}" hint-placeholder-val="{{ false }}"> Die Tour läuft bis {{ tourBis }}.</sc-if></p>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+            <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="primary" size="lg" href="https://paterbrown.com/termine/" icon-end="arrow-up-right" hint-size="230px,56px">Termine und Tickets</x-import>
+            <x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Button" variant="secondary" size="lg" href="#/formate/pater-brown/" hint-size="230px,56px">Das Format im Überblick</x-import>
+          </div>
+        </section>
+        <section>
+          <h2 style="margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase">Häufige Fragen</h2>
+          <div data-faq="" style="padding:var(--space-5) 0;border-top:1px solid var(--border-default)">
+            <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans)">Wie lange dauert „Pater Brown – Das Live-Hörspiel“?</h3>
+            <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Etwa zwei Stunden, einschließlich 15 Minuten Pause.</p>
+          </div>
+          <div data-faq="" style="padding:var(--space-5) 0;border-top:1px solid var(--border-default)">
+            <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans)">Ab welchem Alter ist die Vorstellung geeignet?</h3>
+            <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Empfohlen ab etwa 12 Jahren.</p>
+          </div>
+          <div data-faq="" style="padding:var(--space-5) 0;border-top:1px solid var(--border-default);border-bottom:1px solid var(--border-default)">
+            <h3 data-faq-q="" style="margin:0 0 var(--space-3);font:var(--fw-semibold) 20px/1.3 var(--font-sans)">Wie entstehen die Geräusche?</h3>
+            <p data-faq-a="" style="margin:0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2);text-wrap:pretty">Bei „Pater Brown“ erzeugen Beatboxer alle Geräusche live mit der Stimme und schichten sie mit einer Loop-Station, ohne Playback.</p>
+          </div>
+        </section>
+        <section style="padding-bottom:var(--space-9)">
+          <h2 style="margin:0 0 var(--space-4);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--text-3)">Mehr dazu auf paterbrown.com</h2>
+          <div style="display:flex;flex-direction:column;gap:var(--space-4)">
+            <a href="https://paterbrown.com/hintergruende/krimi-hoerspiel/" style="font:var(--fw-semibold) var(--fs-body-l)/1.4 var(--font-sans)">Die Geschichte des Krimi-Hörspiels</a>
+            <a href="https://paterbrown.com/hintergruende/krimi-events/" style="font:var(--fw-semibold) var(--fs-body-l)/1.4 var(--font-sans)">Krimidinner, Escape Room, Krimiwanderung und Live-Hörspiel im Vergleich</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </article>
+</sc-if>
+
+<!-- ============ ÜBER UNS ============ -->
+<sc-if value="{{ isUeber }}" hint-placeholder-val="{{ false }}">
+  <section style="padding:clamp(40px,7vw,80px) 0 var(--space-9)">
+    <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter)">
+      <h1 style="margin:0 0 var(--space-8);font-family:var(--font-display);font-weight:900;font-size:clamp(64px,12vw,160px);line-height:.86;text-transform:uppercase">Über krimi<span style="color:var(--accent)">.</span>live</h1>
+      <div style="display:flex;flex-wrap:wrap;gap:var(--space-7) var(--space-8);border-top:1px solid var(--border-strong);padding-top:var(--space-7)">
+        <p style="flex:999 1 520px;min-width:0;margin:0;font:var(--fw-regular) clamp(18px,2vw,21px)/1.55 var(--font-sans);color:var(--text-1);text-wrap:pretty">krimi.live sammelt Wissen und Termine rund um Krimis auf der Bühne. Das Magazin gehört zur Dream &amp; Anchor Handelsgesellschaft mbH, die „Pater Brown – Das Live-Hörspiel“ produziert. Antoine Monot, Schauspieler, spielt die Titelrolle und ist Co-Produzent. Wanja Mues ist Erzähler und Flambeau. Künstlerische Leitung &amp; Creative Producerin: Stefanie Sick.</p>
+        <div style="flex:1 1 300px;min-width:0;padding:var(--space-6);background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)">
+          <h2 style="margin:0 0 var(--space-4);font:var(--text-overline);letter-spacing:var(--ls-overline);text-transform:uppercase;color:var(--highlight)">Kontakt</h2>
+          <p style="margin:0 0 var(--space-4);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-1)">Dream &amp; Anchor Handelsgesellschaft mbH<br><span style="color:var(--text-2)">Anschrift laut Impressum von paterbrown.com</span></p>
+          <p style="margin:0 0 var(--space-4);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans)">Telefon: <a href="tel:+49899090153943">+49 89 909015 3943</a></p>
+          <sc-if value="{{ pruefen }}" hint-placeholder-val="{{ true }}"><div style="margin-bottom:var(--space-4)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="170px,24px">Prüfen · Adresse, Kontakt</x-import></div></sc-if>
+          <div style="display:flex;flex-direction:column;gap:var(--space-3);font:var(--fw-semibold) var(--fs-body)/1.4 var(--font-sans)">
+            <a href="https://paterbrown.com/">Pater Brown – Das Live-Hörspiel auf paterbrown.com</a>
+            <a href="https://www.instagram.com/paterbrown.live/">Pater Brown auf Instagram</a>
+            <a href="#/impressum/">Impressum</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ============ IMPRESSUM ============ -->
+<sc-if value="{{ isImpressum }}" hint-placeholder-val="{{ false }}">
+  <section style="padding:clamp(40px,7vw,80px) 0 var(--space-9)">
+    <div style="max-width:880px;margin:0 auto;padding:0 var(--gutter)">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-5)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="220px,24px">Entwurf · anwaltlich zu prüfen</x-import></div>
+      <h1 style="margin:0 0 var(--space-7);font-family:var(--font-display);font-weight:900;font-size:clamp(56px,9vw,112px);line-height:.88;text-transform:uppercase">Impressum</h1>
+      <p style="margin:0 0 var(--space-6);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Die Angaben werden aus dem aktuellen Impressum von paterbrown.com übernommen und auf die Domain krimi.live angepasst. Die Felder unten zeigen die Struktur; Werte ohne Beleg sind leer.</p>
+      <dl style="margin:0;border-top:1px solid var(--border-default)">
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Anbieter</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-1)">Dream &amp; Anchor Handelsgesellschaft mbH</dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Anschrift</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-2)">aus dem Impressum von paterbrown.com · Sitz München oder Grünwald zu bestätigen</dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Vertreten durch</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-2)">Geschäftsführung laut Handelsregister</dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Registereintrag</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-2)">Registergericht und HRB-Nummer</dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">USt-IdNr.</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-2)">laut Impressum paterbrown.com</dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Telefon</dt><dd style="flex:3 1 320px;margin:0"><a href="tel:+49899090153943">+49 89 909015 3943</a></dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">E-Mail</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-2)">laut Impressum paterbrown.com</dd></div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><dt style="flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)">Inhaltlich verantwortlich</dt><dd style="flex:3 1 320px;margin:0;color:var(--text-2)">Person nach § 18 Abs. 2 MStV, Anschrift</dd></div>
+      </dl>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ============ DATENSCHUTZ ============ -->
+<sc-if value="{{ isDatenschutz }}" hint-placeholder-val="{{ false }}">
+  <section style="padding:clamp(40px,7vw,80px) 0 var(--space-9)">
+    <div style="max-width:880px;margin:0 auto;padding:0 var(--gutter)">
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:var(--space-5)"><x-import component-from-global-scope="KrimiLiveDesignSystem_fc12d8.Badge" tone="highlight" hint-size="220px,24px">Entwurf · anwaltlich zu prüfen</x-import></div>
+      <h1 style="margin:0 0 var(--space-7);font-family:var(--font-display);font-weight:900;font-size:clamp(56px,9vw,112px);line-height:.88;text-transform:uppercase">Datenschutz</h1>
+      <p style="margin:0 0 var(--space-6);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Grundlage ist die Datenschutzerklärung von paterbrown.com. Für krimi.live werden nur die Abschnitte übernommen, die zu den tatsächlich eingesetzten Diensten passen:</p>
+      <ol style="margin:0;padding:0;list-style:none;border-top:1px solid var(--border-default);counter-reset:n">
+        <li style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><span style="flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)">01</span><span style="flex:1 1 300px;color:var(--text-1)">Verantwortlicher (Verweis auf das Impressum)</span></li>
+        <li style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><span style="flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)">02</span><span style="flex:1 1 300px;color:var(--text-1)">Hosting bei Cloudflare Pages, Server-Logdaten</span></li>
+        <li style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><span style="flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)">03</span><span style="flex:1 1 300px;color:var(--text-1)">Cookielose Reichweitenmessung, Dienst noch festzulegen</span></li>
+        <li style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><span style="flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)">04</span><span style="flex:1 1 300px;color:var(--text-1)">Schriften lokal ausgeliefert, keine Verbindung zu Google Fonts</span></li>
+        <li style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><span style="flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)">05</span><span style="flex:1 1 300px;color:var(--text-1)">Links zu paterbrown.com und Ticketanbietern</span></li>
+        <li style="display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)"><span style="flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)">06</span><span style="flex:1 1 300px;color:var(--text-1)">Rechte der betroffenen Personen, Beschwerderecht</span></li>
+      </ol>
+      <p style="margin:var(--space-6) 0 0;font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-2)">Keine Cookies, kein Tracking, kein Newsletter. Ein Newsletter folgt nur mit Double-Opt-in und angebundenem Versandsystem.</p>
+    </div>
+  </section>
+</sc-if>
+
+</main>
+
+<footer style="border-top:1px solid var(--border-default);background:var(--surface-1);padding:var(--space-8) 0 var(--space-7)">
+  <div style="max-width:var(--container-max);margin:0 auto;padding:0 var(--gutter);display:flex;flex-wrap:wrap;gap:var(--space-6) var(--space-8)">
+    <div style="flex:1 1 300px;min-width:0">
+      <a href="#/" style="font-family:var(--font-display);font-weight:900;font-size:44px;line-height:1;text-transform:uppercase;text-decoration:none">Krimi<span style="color:var(--accent)">.</span>live</a>
+      <p style="margin:var(--space-4) 0 0;font:var(--fw-regular) var(--fs-body-s)/1.6 var(--font-sans);color:var(--text-2)">Ein Magazin der Dream &amp; Anchor Handelsgesellschaft mbH, Produzentin von <a href="https://paterbrown.com/">„Pater Brown – Das Live-Hörspiel“</a>.<br>Künstlerische Leitung &amp; Creative Producerin: Stefanie Sick</p>
+    </div>
+    <nav aria-label="Fußnavigation" style="flex:1 1 300px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px;align-content:start;font:var(--fw-medium) var(--fs-body-s)/1.4 var(--font-sans)">
+      <a href="#/formate/pater-brown/">Format: Pater Brown</a>
+      <a href="#/hintergruende/was-ist-ein-live-hoerspiel/">Was ist ein Live-Hörspiel?</a>
+      <a href="https://paterbrown.com/termine/">Termine bei paterbrown.com</a>
+      <a href="#/ueber-uns/">Über uns</a>
+      <a href="#/impressum/">Impressum</a>
+      <a href="#/datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;feedUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://paterbrown.com/api/termine.json&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Terminfeed&quot;},&quot;feedVorschau&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Terminfeed&quot;},&quot;pruefen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Redaktion&quot;},&quot;artikelAutor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;offen&quot;,&quot;Antoine Monot&quot;,&quot;Stefanie Sick&quot;],&quot;default&quot;:&quot;offen&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Redaktion&quot;}}">
+const ROUTES = {
+  '/': 'start',
+  '/formate/pater-brown/': 'format',
+  '/hintergruende/was-ist-ein-live-hoerspiel/': 'artikel',
+  '/ueber-uns/': 'ueber',
+  '/impressum/': 'impressum',
+  '/datenschutz/': 'datenschutz',
+};
+const BASE = 'https://krimi.live';
+const META = {
+  start: { path: '/', title: 'krimi.live – Krimi live erleben | Live-Hörspiel & Bühne', desc: 'Krimis, die auf der Bühne entstehen: Hintergründe zum Live-Hörspiel und aktuelle Termine. Auf Tour: Pater Brown mit Antoine Monot und Wanja Mues.' },
+  format: { path: '/formate/pater-brown/', canonical: 'https://paterbrown.com/live-hoerspiel/', title: 'Pater Brown – Das Live-Hörspiel: das Format im Überblick', desc: 'Zwei Schauspieler, ein Beatboxer, zwei Fälle nach Chesterton: Das Live-Hörspiel „Pater Brown“ im Überblick. Tickets und Termine bei paterbrown.com.' },
+  artikel: { path: '/hintergruende/was-ist-ein-live-hoerspiel/', title: 'Was ist ein Live-Hörspiel? Ablauf, Geräusche, Beispiel', desc: 'Ein Live-Hörspiel bringt das Hörspiel auf die Bühne: Stimmen, Geräusche und Musik entstehen vor Publikum. Ablauf, Unterschiede und ein Beispiel.' },
+  ueber: { path: '/ueber-uns/', title: 'Über krimi.live – Betreiber und Team', desc: 'krimi.live ist das Magazin der Dream & Anchor Handelsgesellschaft mbH, Produzentin von „Pater Brown – Das Live-Hörspiel“. Team und Kontakt.' },
+  impressum: { path: '/impressum/', title: 'Impressum – krimi.live', desc: 'Impressum von krimi.live, betrieben von der Dream & Anchor Handelsgesellschaft mbH.' },
+  datenschutz: { path: '/datenschutz/', title: 'Datenschutz – krimi.live', desc: 'Datenschutzerklärung von krimi.live: Hosting, cookielose Messung, keine Tracker.' },
+};
+// [PRÜFEN] sameAs-URLs gegen paterbrown.com abgleichen
+const PERSONS = {
+  monot: { '@type': 'Person', '@id': BASE + '/#antoine-monot', name: 'Antoine Monot', sameAs: ['https://de.wikipedia.org/wiki/Antoine_Monot,_Jr.'] },
+  mues: { '@type': 'Person', '@id': BASE + '/#wanja-mues', name: 'Wanja Mues', sameAs: ['https://de.wikipedia.org/wiki/Wanja_Mues'] },
+  sick: { '@type': 'Person', '@id': BASE + '/#stefanie-sick', name: 'Stefanie Sick', jobTitle: 'Künstlerische Leitung & Creative Producerin' },
+};
+
+class Component extends DCLogic {
+  state = { route: 'start', feed: 'loading', events: [] };
+
+  componentDidMount() {
+    this.onHash = () => { this.setState({ route: this.parse() }, () => this.headSoon()); window.scrollTo(0, 0); };
+    window.addEventListener('hashchange', this.onHash);
+    this.setState({ route: this.parse() }, () => this.headSoon());
+    this.loadFeed();
+  }
+  headSoon() { clearTimeout(this._ht); this._ht = setTimeout(() => this.applyHead(), 30); }
+  componentWillUnmount() { window.removeEventListener('hashchange', this.onHash); }
+  componentDidUpdate(pp, ps) {
+    if (pp.feedUrl !== this.props.feedUrl) this.loadFeed();
+    if (pp.artikelAutor !== this.props.artikelAutor) this.headSoon();
+  }
+  parse() { const h = (location.hash || '').replace(/^#/, '') || '/'; return ROUTES[h] || 'start'; }
+
+  async loadFeed() {
+    const url = this.props.feedUrl ?? 'https://paterbrown.com/api/termine.json';
+    this.setState({ feed: 'loading' });
+    try {
+      const r = await fetch(url, { headers: { Accept: 'application/json' } });
+      if (!r.ok) throw new Error(r.status);
+      const j = await r.json();
+      const list = Array.isArray(j) ? j : (j.termine || j.events || []);
+      const now = new Date();
+      const ev = list.map(e => this.norm(e)).filter(e => e && e.start >= now).sort((a, b) => a.start - b.start);
+      this.setState({ feed: ev.length ? 'ok' : 'error', events: ev }, () => this.headSoon());
+    } catch (e) { this.setState({ feed: 'error', events: [] }, () => this.headSoon()); }
+  }
+  norm(e) {
+    const s = e.startDate || e.start || e.datum; if (!s) return null;
+    const d = new Date(s); if (isNaN(d)) return null;
+    const tz = e.timeZone || 'Europe/Berlin';
+    const wd = new Intl.DateTimeFormat('de-DE', { weekday: 'short', timeZone: tz }).format(d).replace('.', '').toUpperCase();
+    const dt = new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: tz }).format(d);
+    const t = new Intl.DateTimeFormat('de-DE', { hour: '2-digit', minute: '2-digit', timeZone: tz }).format(d);
+    return { start: d, startDate: s, doorTime: e.doorTime || null, wd, dt, t,
+      city: e.city || e.stadt || '', venue: e.venue || e.spielstaette || (e.location && e.location.name) || '',
+      country: e.country || e.land || '', url: e.ticketUrl || e.offerUrl || e.url || 'https://paterbrown.com/termine/',
+      price: e.priceFrom ?? e.preisAb, currency: e.currency || e.waehrung };
+  }
+
+  applyHead() {
+    const route = this.state.route; const M = META[route];
+    document.documentElement.lang = 'de';
+    document.title = M.title;
+    const meta = (n, v) => { let el = document.head.querySelector(`meta[name="${n}"]`); if (!el) { el = document.createElement('meta'); el.name = n; document.head.appendChild(el); } el.content = v; };
+    meta('description', M.desc);
+    let can = document.head.querySelector('link[rel="canonical"]');
+    if (!can) { can = document.createElement('link'); can.rel = 'canonical'; document.head.appendChild(can); }
+    can.href = M.canonical || BASE + M.path;
+    document.head.querySelectorAll('script[data-kl-ld]').forEach(s => s.remove());
+    const graph = [
+      { '@type': 'Organization', '@id': BASE + '/#org', name: 'krimi.live', url: BASE + '/',
+        parentOrganization: { '@type': 'Organization', '@id': BASE + '/#dream-anchor', name: 'Dream & Anchor Handelsgesellschaft mbH', telephone: '+49 89 909015 3943' },
+        sameAs: ['https://paterbrown.com', 'https://www.instagram.com/paterbrown.live/'] },
+      { '@type': 'WebSite', '@id': BASE + '/#site', url: BASE + '/', name: 'krimi.live', inLanguage: 'de-DE', publisher: { '@id': BASE + '/#dream-anchor' } },
+      { '@type': 'WebPage', '@id': BASE + M.path, url: BASE + M.path, name: M.title, description: M.desc, isPartOf: { '@id': BASE + '/#site' }, inLanguage: 'de-DE' },
+    ];
+    const faq = [...document.querySelectorAll('[data-faq]')].map(n => ({ '@type': 'Question', name: n.querySelector('[data-faq-q]').textContent.trim(),
+      acceptedAnswer: { '@type': 'Answer', text: n.querySelector('[data-faq-a]').textContent.trim() } }));
+    if ((route === 'start' || route === 'artikel') && faq.length) graph.push({ '@type': 'FAQPage', '@id': BASE + M.path + '#faq', mainEntity: faq });
+    if (route === 'artikel') {
+      const a = this.props.artikelAutor ?? 'offen';
+      const author = a === 'Antoine Monot' ? PERSONS.monot : a === 'Stefanie Sick' ? PERSONS.sick : { '@id': BASE + '/#org' };
+      graph.push({ '@type': 'Article', '@id': BASE + M.path + '#article', headline: 'Was ist ein Live-Hörspiel?', description: M.desc, inLanguage: 'de-DE',
+        author, publisher: { '@id': BASE + '/#dream-anchor' }, mainEntityOfPage: { '@id': BASE + M.path },
+        datePublished: 'BUILD_DATE_PUBLISHED', dateModified: 'BUILD_DATE_MODIFIED' });
+    }
+    if ((route === 'start' || route === 'format') && this.state.feed === 'ok') {
+      this.state.events.slice(0, 3).forEach(e => {
+        const ev = { '@type': 'TheaterEvent', name: 'Pater Brown – Das Live-Hörspiel', startDate: e.startDate,
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode', eventStatus: 'https://schema.org/EventScheduled',
+          location: { '@type': 'Place', name: e.venue, address: { '@type': 'PostalAddress', addressLocality: e.city, addressCountry: e.country || undefined } },
+          performer: [PERSONS.monot, PERSONS.mues], organizer: { '@id': BASE + '/#dream-anchor' },
+          offers: { '@type': 'Offer', url: e.url } };
+        if (e.doorTime) ev.doorTime = e.doorTime;
+        if (e.price != null && e.currency) { ev.offers.price = e.price; ev.offers.priceCurrency = e.currency; }
+        graph.push(ev);
+      });
+    }
+    const s = document.createElement('script'); s.type = 'application/ld+json'; s.setAttribute('data-kl-ld', '');
+    s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+    document.head.appendChild(s);
+  }
+
+  renderVals() {
+    const r = this.state.route, f = this.state.feed, ev = this.state.events;
+    const last = ev.length ? ev[ev.length - 1].start : null;
+    const autor = this.props.artikelAutor ?? 'offen';
+    const pruefen = this.props.pruefen ?? true;
+    return {
+      isStart: r === 'start', isFormat: r === 'format', isArtikel: r === 'artikel', isUeber: r === 'ueber',
+      isImpressum: r === 'impressum', isDatenschutz: r === 'datenschutz',
+      feedOk: f === 'ok', feedNotOk: f !== 'ok', feedLoading: f === 'loading', feedFailed: f === 'error',
+      next3: ev.slice(0, 3), termineAnzahl: ev.length,
+      tourBis: last ? new Intl.DateTimeFormat('de-DE', { month: 'long', year: 'numeric', timeZone: 'Europe/Berlin' }).format(last) : '',
+      vorschau: this.props.feedVorschau ?? false, platzhalterZeilen: [1, 2, 3],
+      pruefen, autorName: autor === 'offen' ? 'der Redaktion' : autor, autorPruefen: pruefen && autor === 'offen',
+    };
+  }
+}
+</script>
+</body>
+</html>

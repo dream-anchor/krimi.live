@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import Pruefen from '../../components/Pruefen.astro';
+import { META } from '../../data/meta';
+import { baseGraph, PERSONS } from '../../lib/schema';
+
+const meta = META.ueber;
+const graph = [...baseGraph(meta), PERSONS.monot, PERSONS.mues, PERSONS.sick];
+---
+<Base meta={meta} graph={graph}>
+  <section class="seite">
+    <div class="wrap">
+      <h1>Über krimi<span>.</span>live</h1>
+      <div class="inhalt">
+        <p class="lead text">krimi.live sammelt Wissen und Termine rund um Krimis auf der Bühne. Das Magazin gehört zur Dream &amp; Anchor Handelsgesellschaft mbH, die „Pater Brown – Das Live-Hörspiel“ produziert. Antoine Monot, Schauspieler, spielt die Titelrolle und ist Co-Produzent. Wanja Mues ist Erzähler und Flambeau. Künstlerische Leitung &amp; Creative Producerin: Stefanie Sick.</p>
+        <div class="kontakt">
+          <h2 class="overline overline--hl">Kontakt</h2>
+          <p class="k">Dream &amp; Anchor Handelsgesellschaft mbH<br /><span class="muted">Anschrift laut Impressum von paterbrown.com</span></p>
+          <p class="k">Telefon: <a href="tel:+49899090153943">+49 89 909015 3943</a></p>
+          <Pruefen label="Adresse, Kontakt" />
+          <div class="links">
+            <a href="https://paterbrown.com/">Pater Brown – Das Live-Hörspiel auf paterbrown.com</a>
+            <a href="https://www.instagram.com/paterbrown.live/">Pater Brown auf Instagram</a>
+            <a href="/impressum/">Impressum</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+.seite{padding:clamp(40px,7vw,80px) 0 var(--space-9)}
+h1{margin:0 0 var(--space-8);font-family:var(--font-display);font-weight:900;font-size:clamp(64px,12vw,160px);line-height:.86;text-transform:uppercase}
+h1 span{color:var(--accent)}
+.inhalt{display:flex;flex-wrap:wrap;gap:var(--space-7) var(--space-8);border-top:1px solid var(--border-strong);padding-top:var(--space-7)}
+.text{flex:999 1 520px;min-width:0}
+.kontakt{flex:1 1 300px;min-width:0;padding:var(--space-6);background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)}
+.kontakt h2{margin-bottom:var(--space-4)}
+.k{margin:0 0 var(--space-4);font:var(--fw-regular) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-1)}
+.muted{color:var(--text-2)}
+.links{display:flex;flex-direction:column;gap:var(--space-3);margin-top:var(--space-4);font:var(--fw-semibold) var(--fs-body)/1.4 var(--font-sans)}
+</style>

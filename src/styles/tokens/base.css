@@ -1,0 +1,5 @@
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--bg-page);color:var(--text-1);font:var(--text-body);-webkit-font-smoothing:antialiased}
+a{color:var(--text-1);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:hover{color:var(--accent-hover)}
+::selection{background:var(--accent);color:var(--on-accent)}

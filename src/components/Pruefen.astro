@@ -1,0 +1,9 @@
+---
+// Redaktionsmarke [PRÜFEN]. Mit SHOW_PRUEFEN=false beim Build ausgeblendet.
+import Badge from './Badge.astro';
+import { SHOW_PRUEFEN } from '../data/config';
+interface Props { label: string; block?: boolean; force?: boolean }
+const { label, block = true, force = false } = Astro.props;
+const show = force || SHOW_PRUEFEN;
+---
+{show && (block ? <div class="mt-pruef"><Badge tone="highlight">Prüfen · {label}</Badge></div> : <Badge tone="highlight">Prüfen · {label}</Badge>)}

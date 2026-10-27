@@ -1,0 +1,11 @@
+---
+// Lucide-Icon (lucide-static@0.454.0) wie im Design System, aber beim Build inline gesetzt statt per CDN-Maske.
+import { readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+interface Props { name: string; size?: number; label?: string }
+const { name, size = 20, label } = Astro.props;
+const require = createRequire(import.meta.url);
+const raw = readFileSync(require.resolve(`lucide-static/icons/${name}.svg`), 'utf8');
+const inner = raw.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+---
+<svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex:none" role={label ? 'img' : undefined} aria-label={label} aria-hidden={label ? undefined : 'true'} focusable="false" set:html={inner} />

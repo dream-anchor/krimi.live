@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import RechtsSeite from '../../components/RechtsSeite.astro';
+import { META } from '../../data/meta';
+import { baseGraph } from '../../lib/schema';
+
+const meta = META.datenschutz;
+// [PRÜFEN] Text aus der Datenschutzerklärung von paterbrown.com übernehmen und auf die eingesetzten Dienste anpassen.
+const abschnitte = [
+  'Verantwortlicher (Verweis auf das Impressum)',
+  'Hosting bei Cloudflare Pages, Server-Logdaten',
+  'Cookielose Reichweitenmessung, Dienst noch festzulegen',
+  'Schriften lokal ausgeliefert, keine Verbindung zu Google Fonts',
+  'Links zu paterbrown.com und Ticketanbietern',
+  'Rechte der betroffenen Personen, Beschwerderecht',
+];
+---
+<Base meta={meta} graph={baseGraph(meta)}>
+  <RechtsSeite title="Datenschutz" intro="Grundlage ist die Datenschutzerklärung von paterbrown.com. Für krimi.live werden nur die Abschnitte übernommen, die zu den tatsächlich eingesetzten Diensten passen:">
+    <ol class="liste">
+      {abschnitte.map((a, i) => <li><span class="nr">{String(i + 1).padStart(2, '0')}</span><span class="t">{a}</span></li>)}
+    </ol>
+    <p class="body schluss">Keine Cookies, kein Tracking, kein Newsletter. Ein Newsletter folgt nur mit Double-Opt-in und angebundenem Versandsystem.</p>
+  </RechtsSeite>
+</Base>
+<style>
+.liste{margin:0;padding:0;list-style:none;border-top:1px solid var(--border-default)}
+li{display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)}
+.nr{flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)}
+.t{flex:1 1 300px;color:var(--text-1)}
+.schluss{margin-top:var(--space-6)}
+</style>

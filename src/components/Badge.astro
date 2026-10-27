@@ -1,0 +1,19 @@
+---
+// Design System · Badge (soft/solid, Töne wie KrimiLiveDesignSystem_fc12d8.Badge)
+interface Props { tone?: 'neutral' | 'accent' | 'highlight' | 'success' | 'info'; variant?: 'soft' | 'solid' }
+const { tone = 'neutral', variant = 'soft' } = Astro.props;
+---
+<span class:list={['badge', `badge--${tone}`, variant === 'solid' && 'badge--solid']}><slot /></span>
+<style>
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:var(--radius-xs);font:var(--fw-medium) 11px/1 var(--font-mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.badge--neutral{background:var(--surface-4);color:var(--text-1)}
+.badge--accent{background:var(--accent-soft);color:var(--red-300)}
+.badge--highlight{background:var(--highlight-soft);color:var(--amber-400)}
+.badge--success{background:var(--success-soft);color:var(--success)}
+.badge--info{background:var(--info-soft);color:var(--info)}
+.badge--neutral.badge--solid{background:var(--noir-50);color:var(--text-inverse)}
+.badge--accent.badge--solid{background:var(--accent);color:var(--on-accent)}
+.badge--highlight.badge--solid{background:var(--highlight);color:var(--on-highlight)}
+.badge--success.badge--solid{background:var(--green-500);color:#fff}
+.badge--info.badge--solid{background:var(--blue-500);color:var(--text-inverse)}
+</style>

@@ -1,0 +1,11 @@
+:root{
+--shadow-1:0 1px 0 rgba(245,241,234,.04) inset,0 6px 20px rgba(0,0,0,.35);
+--shadow-2:0 1px 0 rgba(245,241,234,.06) inset,0 18px 48px rgba(0,0,0,.55);
+--shadow-3:0 30px 80px rgba(0,0,0,.7);
+--focus-ring:0 0 0 3px rgba(217,40,60,.45);
+--spotlight:radial-gradient(ellipse 60% 70% at 50% 0%,rgba(226,178,46,.14),rgba(226,178,46,0) 70%);/* @kind other */
+--vignette:linear-gradient(180deg,rgba(11,10,9,0) 40%,rgba(11,10,9,.92) 100%);/* @kind other */
+--blur-overlay:blur(8px);/* @kind other */
+--ease-out:cubic-bezier(.2,.7,.2,1);/* @kind other */--ease-in-out:cubic-bezier(.6,0,.3,1);/* @kind other */
+--dur-fast:120ms;/* @kind other */--dur-base:200ms;/* @kind other */--dur-slow:420ms;/* @kind other */
+}

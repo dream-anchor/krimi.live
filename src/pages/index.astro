@@ -1,0 +1,124 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import TerminListe from '../components/TerminListe.astro';
+import FaqListe from '../components/FaqListe.astro';
+import { META } from '../data/meta';
+import { FAQ_START } from '../data/faq';
+import { TERMINE_URL } from '../data/config';
+import { getFeed, platzhalter } from '../lib/feed';
+import { baseGraph, faqPage, theaterEvents } from '../lib/schema';
+
+const meta = META.start;
+const feed = await getFeed();
+const p = platzhalter(feed);
+const graph = [...baseGraph(meta), faqPage(meta, FAQ_START), ...theaterEvents(feed)];
+---
+<Base meta={meta} graph={graph}>
+  <section class="hero">
+    <div class="wrap hero__in">
+      <div class="hero__title">
+        <p class="overline overline--hl hero__over">Magazin · Krimis auf der Bühne</p>
+        <h1><span>Krimi</span> <span class="hl">live</span> <span>erleben</span></h1>
+      </div>
+      <div class="hero__side">
+        <p class="hero__lead">krimi.live ist das Magazin für Krimis, die auf der Bühne entstehen: Live-Hörspiele, Stimmen, Geräusche und Spannung im selben Raum. Im Mittelpunkt steht derzeit „Pater Brown – Das Live-Hörspiel“ mit Antoine Monot und Wanja Mues, auf Tour durch Deutschland und die Schweiz.</p>
+        <div class="btns">
+          <Button variant="primary" size="lg" href={TERMINE_URL} iconEnd="arrow-up-right">Tickets &amp; Termine</Button>
+          <Button variant="secondary" size="lg" href="/formate/pater-brown/">Zum Format</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-termine" class="sec">
+    <div class="wrap split">
+      <div class="split__side">
+        <h2 id="h-termine" class="h2 mb5">Die nächsten Termine</h2>
+        <p class="body">Die nächsten Vorstellungen von „Pater Brown – Das Live-Hörspiel“. {p
+          ? <>Alle {p.termine_anzahl} Termine bis {p.letzter_termin_monat_jahr} mit Ticketlinks stehen auf <a href={TERMINE_URL}>paterbrown.com</a>.</>
+          : <>Alle Termine mit Ticketlinks stehen auf <a href={TERMINE_URL}>paterbrown.com</a>.</>}</p>
+      </div>
+      <div class="split__main">
+        <TerminListe feed={feed} vorschau />
+        <div class="btns mt6">
+          <Button variant="primary" size="lg" href={TERMINE_URL} iconEnd="arrow-up-right">Alle Termine</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-format" class="sec sec--alt">
+    <div class="wrap split split--top">
+      <div class="split__side">
+        <p class="overline overline--muted mb4">Pater Brown – Das Live-Hörspiel</p>
+        <h2 id="h-format" class="h2">Das Format der Saison</h2>
+      </div>
+      <div class="split__main">
+        <p class="format__text">Zwei Schauspieler sprechen alle Rollen. Beatboxer erzeugen sämtliche Geräusche live mit Stimme und Loop-Station, ohne Playback. Pro Abend gibt es zwei Fälle nach G. K. Chesterton, in etwa zwei Stunden inklusive Pause.</p>
+        <div class="btns">
+          <Button variant="secondary" size="lg" href="/formate/pater-brown/">Zum Format</Button>
+          <Button variant="primary" size="lg" href={TERMINE_URL} iconEnd="arrow-up-right">Tickets &amp; Termine</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-hg" class="sec">
+    <div class="wrap split">
+      <div class="split__side"><h2 id="h-hg" class="h2">Hintergründe</h2></div>
+      <div class="split__main">
+        <a href="/hintergruende/was-ist-ein-live-hoerspiel/" class="karte">
+          <div class="karte__text">
+            <p class="overline overline--hl mb4">Kernartikel</p>
+            <h3>Was ist ein Live-Hörspiel?</h3>
+            <p class="body-l">Wie ein Hörspiel auf die Bühne kommt, wer die Geräusche macht und was das Publikum davon hat.</p>
+          </div>
+          <span class="karte__pfeil"><Icon name="arrow-right" size={24} /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-wer" class="sec">
+    <div class="wrap split">
+      <div class="split__side"><h2 id="h-wer" class="h2">Wer hinter krimi.live steht</h2></div>
+      <div class="split__main">
+        <p class="body-l wer__text">krimi.live wird von der Dream &amp; Anchor Handelsgesellschaft mbH betrieben, die auch „Pater Brown – Das Live-Hörspiel“ produziert. Das Magazin schreibt aus der Praxis, von Menschen, die Live-Hörspiele selbst auf die Bühne bringen.</p>
+        <a href="/ueber-uns/" class="link-strong">Betreiber, Team und Kontakt</a>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-faq" class="sec">
+    <div class="wrap">
+      <h2 id="h-faq" class="h2 mb7">Häufige Fragen</h2>
+      <FaqListe items={FAQ_START} grid />
+    </div>
+  </section>
+</Base>
+<style>
+.hero{padding:clamp(40px,7vw,88px) 0 var(--space-9)}
+.hero__in{display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--space-7) var(--space-8)}
+.hero__title{flex:1 1 520px;min-width:0}
+.hero__over{margin-bottom:var(--space-5)}
+h1{margin:0;font-family:var(--font-display);font-weight:900;font-size:clamp(76px,17vw,224px);line-height:.84;letter-spacing:-.01em;text-transform:uppercase;color:var(--text-1)}
+h1 span{display:block}
+h1 .hl{color:var(--highlight)}
+.hero__side{flex:0 1 440px;min-width:0;padding-bottom:var(--space-3)}
+.hero__lead{margin:0 0 var(--space-6);font:var(--fw-regular) clamp(18px,2vw,21px)/1.5 var(--font-sans);color:var(--text-1);text-wrap:pretty}
+.split--top{align-items:flex-start}
+.mb4{margin-bottom:var(--space-4)}
+.mb5{margin-bottom:var(--space-5)}
+.mb7{margin-bottom:var(--space-7)}
+.mt6{margin-top:var(--space-6)}
+.format__text{margin:0 0 var(--space-6);font:var(--fw-regular) clamp(18px,2vw,22px)/1.5 var(--font-sans);color:var(--text-1);max-width:62ch;text-wrap:pretty}
+.karte{display:flex;flex-wrap:wrap;align-items:flex-end;gap:var(--space-5) var(--space-7);padding:var(--space-7);background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);text-decoration:none;color:var(--text-1);transition:transform var(--dur-base) var(--ease-out),border-color var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out)}
+.karte:hover{transform:translateY(-2px);border-color:var(--border-strong);box-shadow:var(--shadow-2);color:var(--text-1)}
+.karte:focus-visible{border-radius:var(--radius-lg)}
+.karte__text{flex:1 1 320px;min-width:0}
+.karte h3{margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:900;font-size:clamp(40px,6vw,72px);line-height:1;text-transform:uppercase}
+.karte__pfeil{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);flex:0 0 auto}
+.wer__text{margin-bottom:var(--space-5);max-width:62ch}
+</style>
