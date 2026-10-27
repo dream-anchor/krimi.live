@@ -29,7 +29,8 @@ function norm(e: any, f: Format): Termin | null {
   // paterbrown.com-API /api/tour-events (event_date, ticket_url, is_active, nur Datum).
   const tourEvents = 'event_date' in e;
   if (tourEvents && e.is_active === false) return null;
-  const s: string | undefined = e.startDate || e.start || e.event_date || e.datum; if (!s) return null;
+  // event_date kommt aus Postgres als Datum, über JSON teils als Mitternachts-Zeitstempel (…T00:00:00Z): nur der Tag zählt.
+  const s: string | undefined = tourEvents ? (e.event_date ? String(e.event_date).slice(0, 10) : undefined) : (e.startDate || e.start || e.datum); if (!s) return null;
   const nurDatum = /^\d{4}-\d{2}-\d{2}$/.test(s);
   const city: string = e.city || e.stadt || '';
   const zuerich = /z(ü|ue)rich/i.test(city);
