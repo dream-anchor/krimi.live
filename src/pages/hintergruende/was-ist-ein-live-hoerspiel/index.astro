@@ -5,13 +5,17 @@ import Pruefen from '../../../components/Pruefen.astro';
 import FaqListe from '../../../components/FaqListe.astro';
 import { META } from '../../../data/meta';
 import { FAQ_ARTIKEL } from '../../../data/faq';
-import { BASE, TERMINE_URL, ARTIKEL_AUTOR } from '../../../data/config';
+import { BASE, ARTIKEL_AUTOR } from '../../../data/config';
 import { getFeed, platzhalter } from '../../../lib/feed';
+import { getEntry } from 'astro:content';
 import { baseGraph, faqPage, PERSONS } from '../../../lib/schema';
 import { gitDates, deDatum } from '../../../lib/gitdate';
 
 const meta = META.artikel;
-const p = platzhalter(await getFeed());
+// Beispiel im Artikel ist Pater Brown; Tourende kommt aus dessen Feed.
+const pb = (await getEntry('formate', 'pater-brown'))!;
+const TERMINE_URL = pb.data.links.termine;
+const p = platzhalter(await getFeed(pb));
 const dates = gitDates('src/pages/hintergruende/was-ist-ein-live-hoerspiel/index.astro');
 // [PRÜFEN] Autor: Freigabe der Namensnennung (ARTIKEL_AUTOR). Bis dahin „der Redaktion“, im Schema die Organisation.
 const author = ARTIKEL_AUTOR === 'Antoine Monot' ? PERSONS.monot : ARTIKEL_AUTOR === 'Stefanie Sick' ? PERSONS.sick : { '@id': BASE + '/#org' };
@@ -62,7 +66,7 @@ const abschnitte = [
           <p class="fliess bsp__t">Antoine Monot spielt Pater Brown, Wanja Mues ist Erzähler und Flambeau. An einem Abend laufen zwei Fälle nach G. K. Chesterton: „Das blaue Kreuz“ und „Die fallenden Brüder“. Die Vorstellung dauert etwa zwei Stunden einschließlich Pause.{p && ` Die Tour läuft bis ${p.letzter_termin_monat_jahr}.`}</p>
           <div class="btns">
             <Button variant="primary" size="lg" href={TERMINE_URL} iconEnd="arrow-up-right">Termine und Tickets</Button>
-            <Button variant="secondary" size="lg" href="/formate/pater-brown/">Das Format im Überblick</Button>
+            <Button variant="secondary" size="lg" href={`/formate/${pb.id}/`}>Das Format im Überblick</Button>
           </div>
         </section>
         <section>

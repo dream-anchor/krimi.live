@@ -1,0 +1,120 @@
+---
+// Vorlage für jedes Stück: gefüllt aus src/content/formate/<slug>.json
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/Button.astro';
+import Badge from '../../components/Badge.astro';
+import Pruefen from '../../components/Pruefen.astro';
+import TerminListe from '../../components/TerminListe.astro';
+import { alleFormate, quellenText, STATUS_TEXT, type Format } from '../../lib/formate';
+import { getFeed } from '../../lib/feed';
+import { baseGraph, theaterEvents } from '../../lib/schema';
+import type { PageMeta } from '../../data/meta';
+
+export async function getStaticPaths() {
+  return (await alleFormate()).map(f => ({ params: { slug: f.id }, props: { format: f } }));
+}
+const { format } = Astro.props as { format: Format };
+const d = format.data;
+const meta: PageMeta = { path: `/formate/${format.id}/`, title: d.seo.title, desc: d.seo.desc, canonical: d.links.canonical };
+const feed = d.status === 'abgespielt' ? null : await getFeed(format);
+const graph = [...baseGraph(meta), ...(feed?.ok ? theaterEvents(feed.events.slice(0, 3), [format]) : [])];
+const [haupt, ...unter] = d.titel.split(' – ');
+---
+<Base meta={meta} graph={graph}>
+  <section class="kopf">
+    <div class="wrap">
+      <div class="kopf__over">
+        <p class="overline overline--hl">{d.overline}</p>
+        {d.status !== 'laeuft' && <Badge tone="highlight">{STATUS_TEXT[d.status]}</Badge>}
+      </div>
+      <h1><span class="h1__a">{haupt}</span>{unter.length > 0 && <><span class="sr-only"> – </span><span class="h1__b">{unter.join(' – ')}</span></>}</h1>
+      {d.teile.length > 0 && (
+        <div class="faelle">
+          {d.teile.map(t => <div class="fall"><p class="overline overline--muted">{t.label}</p><p class="fall__t">{t.titel}</p></div>)}
+        </div>
+      )}
+      <div class="faelle__fuss">
+        <span class="overline overline--muted">{d.vorlage}</span>
+        {d.teilePruefen && <Pruefen label={d.teilePruefen} block={false} />}
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-worum" class="worum">
+    <div class="wrap split">
+      <h2 id="f-worum" class="h2 h2--s split__side">Worum es geht</h2>
+      <p class="lead split__main">{d.worum}</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-stimmen" class="sec sec--m sec--alt">
+    <div class="wrap split">
+      <h2 id="f-stimmen" class="h2 h2--s split__side">Die Stimmen des Abends</h2>
+      <div class="split__main">
+        <dl class="stimmen">
+          {d.ensemble.map(s => <div><dt>{s.name}</dt><dd>{s.rolle}</dd></div>)}
+        </dl>
+        {d.ensemblePruefen && <Pruefen label={d.ensemblePruefen} />}
+        {d.ensembleHinweis && <p class="body tv">{d.ensembleHinweis.text}</p>}
+        {d.ensembleHinweis?.pruefen && <Pruefen label={d.ensembleHinweis.pruefen} />}
+        {d.credits.map(c => <p class="credit">{c}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="f-ablauf" class="sec sec--m">
+    <div class="wrap split">
+      <h2 id="f-ablauf" class="h2 h2--s split__side">Ablauf und Dauer</h2>
+      <div class="split__main">
+        <p class="lead">{d.ablauf.text}</p>
+        {d.ablauf.pruefen && <Pruefen label={d.ablauf.pruefen} />}
+      </div>
+    </div>
+  </section>
+
+  {feed && (
+    <section aria-labelledby="f-termine" class="sec sec--m">
+      <div class="wrap split">
+        <h2 id="f-termine" class="h2 h2--s split__side">Termine und Tickets</h2>
+        <div class="split__main">
+          {d.status === 'angekuendigt' && !feed.ok
+            ? <p class="lead">Termine folgen. Sobald sie feststehen, erscheinen sie hier und auf der Terminseite des Stücks.</p>
+            : <TerminListe feed={feed} quellen={quellenText([format])} />}
+          <div class="btns mt6">
+            <Button variant="primary" size="lg" href={d.links.termine} iconEnd="arrow-up-right">Alle Termine und Tickets</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="sec sec--m">
+    <div class="wrap schluss">
+      {d.links.website && <a href={d.links.website} class="schluss__a">{d.links.websiteText ?? d.links.website}</a>}
+      <a href="/hintergruende/was-ist-ein-live-hoerspiel/" class="link-strong">Hintergrund: Was ist ein Live-Hörspiel?</a>
+    </div>
+  </section>
+</Base>
+<style>
+.kopf{padding:clamp(40px,7vw,88px) 0 0}
+.kopf__over{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:var(--space-5)}
+h1{margin:0;font-family:var(--font-display);font-weight:900;font-size:clamp(68px,14vw,184px);line-height:.84;letter-spacing:-.01em;text-transform:uppercase}
+.h1__a{display:block}
+.h1__b{display:block;margin-top:.12em;font-weight:700;font-size:.34em;line-height:1;color:var(--text-2)}
+.faelle{margin-top:var(--space-8);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));border-top:1px solid var(--border-default)}
+.fall{padding:var(--space-6) var(--space-6) var(--space-6) 0;border-bottom:1px solid var(--border-default)}
+.fall .overline{margin-bottom:var(--space-3)}
+.fall__t{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1.02;text-transform:uppercase}
+.faelle__fuss{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:var(--space-4) 0}
+.worum{padding:var(--space-9) 0 var(--space-8)}
+.sec--m{padding:var(--space-8) 0}
+.stimmen{margin:0;border-top:1px solid var(--border-default)}
+.stimmen div{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 24px;padding:var(--space-5) 0;border-bottom:1px solid var(--border-default)}
+.stimmen dt{flex:1 1 260px;font-family:var(--font-display);font-weight:800;font-size:34px;line-height:1;text-transform:uppercase}
+.stimmen dd{flex:1 1 220px;margin:0;font:var(--fw-medium) 13px/1.4 var(--font-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-2)}
+.tv{margin-top:var(--space-5)}
+.credit{margin:var(--space-5) 0 0;font:var(--fw-semibold) var(--fs-body)/var(--lh-body) var(--font-sans);color:var(--text-1)}
+.mt6{margin-top:var(--space-6)}
+.schluss{display:flex;flex-wrap:wrap;gap:var(--space-4) var(--space-7);align-items:center}
+.schluss__a{font-family:var(--font-display);font-weight:800;font-size:clamp(26px,3.4vw,40px);line-height:1.05;text-transform:uppercase;text-decoration:underline;text-decoration-thickness:2px}
+</style>
