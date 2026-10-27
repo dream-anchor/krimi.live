@@ -11,8 +11,10 @@ export const PERSONS = {
   sick: { '@type': 'Person', '@id': BASE + '/#stefanie-sick', name: 'Stefanie Sick', jobTitle: 'Künstlerische Leitung & Creative Producerin' },
 };
 
-// [PRÜFEN] Sitz (München oder Grünwald) und Anschrift laut Impressum von paterbrown.com ergänzen
-const DREAM_ANCHOR = { '@type': 'Organization', '@id': BASE + '/#dream-anchor', name: 'Dream & Anchor Handelsgesellschaft mbH', telephone: '+49 89 909015 3943' };
+// Angaben laut Impressum von paterbrown.com; Sitz ist Grünwald (nie München)
+const DREAM_ANCHOR = { '@type': 'Organization', '@id': BASE + '/#dream-anchor', name: 'Dream & Anchor Handelsgesellschaft mbH',
+  telephone: '+49 89 909015 3943', email: 'hello@dream-anchor.com', vatID: 'DE320291075',
+  address: { '@type': 'PostalAddress', streetAddress: 'Nördliche Münchner Straße 27a', postalCode: '82031', addressLocality: 'Grünwald', addressCountry: 'DE' } };
 
 export function baseGraph(m: PageMeta): any[] {
   return [

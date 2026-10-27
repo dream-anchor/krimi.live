@@ -22,8 +22,10 @@ npm run dev
 | --- | --- | --- |
 | `FEED_URL_<STÜCK>` | aus dem Datensatz (`feed.url`) | überschreibt den Feed eines Stücks, z. B. `FEED_URL_PATER_BROWN` (Format: `docs/termine-feed.md`) |
 | `SHOW_PRUEFEN` | `true` | `false` blendet die Prüfmarken aus – erst nach Klärung aller Punkte |
-| `ARTIKEL_AUTOR` | `offen` | `Antoine Monot` oder `Stefanie Sick`, sobald freigegeben |
+| `ARTIKEL_AUTOR` | `Stefanie Sick` | `Antoine Monot` oder `Stefanie Sick`, sobald freigegeben |
 | `FEED_VORSCHAU` | `false` | Platzhalterzeilen ohne Feed (nur Vorschau) |
+| `BREVO_API_KEY` | – (Secret) | Brevo-API-Schlüssel; ist er gesetzt, erscheint das Newsletter-Formular und `/api/newsletter` trägt per Double-Opt-in ein |
+| `BREVO_LIST_ID` / `BREVO_DOI_TEMPLATE_ID` | `11` / `8` | Brevo-Liste „krimi.live – Newsletter & Warteliste“ und DOI-Vorlage |
 
 Cloudflare Pages: Build-Befehl `npm run build`, Ausgabeordner `dist`. Täglicher Rebuild über einen Deploy Hook (Cron), damit der Feed-Block aktuell bleibt.
 

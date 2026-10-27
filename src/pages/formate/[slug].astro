@@ -3,6 +3,8 @@
 import Base from '../../layouts/Base.astro';
 import Button from '../../components/Button.astro';
 import Badge from '../../components/Badge.astro';
+import Foto from '../../components/Foto.astro';
+import Newsletter from '../../components/Newsletter.astro';
 import Pruefen from '../../components/Pruefen.astro';
 import TerminListe from '../../components/TerminListe.astro';
 import { alleFormate, quellenText, STATUS_TEXT, type Format } from '../../lib/formate';
@@ -20,7 +22,7 @@ const feed = d.status === 'abgespielt' ? null : await getFeed(format);
 const graph = [...baseGraph(meta), ...(feed?.ok ? theaterEvents(feed.events.slice(0, 3), [format]) : [])];
 const [haupt, ...unter] = d.titel.split(' – ');
 ---
-<Base meta={meta} graph={graph}>
+<Base meta={meta} graph={graph} ogImage={d.bilder.kopf}>
   <section class="kopf">
     <div class="wrap">
       <div class="kopf__over">
@@ -37,6 +39,7 @@ const [haupt, ...unter] = d.titel.split(' – ');
         <span class="overline overline--muted">{d.vorlage}</span>
         {d.teilePruefen && <Pruefen label={d.teilePruefen} block={false} />}
       </div>
+      {d.bilder.kopf && <Foto bild={d.bilder.kopf} ratio="16/9" eager class="kopf__foto" />}
     </div>
   </section>
 
@@ -88,6 +91,8 @@ const [haupt, ...unter] = d.titel.split(' – ');
     </section>
   )}
 
+  {d.status === 'angekuendigt' && <Newsletter id="warteliste" titel="Auf die Warteliste" text={`Sobald es Termine für „${d.titel}“ gibt, erfahren Sie es zuerst – per E-Mail, mit Bestätigung per Double-Opt-in.`} />}
+
   <section class="sec sec--m">
     <div class="wrap schluss">
       {d.links.website && <a href={d.links.website} class="schluss__a">{d.links.websiteText ?? d.links.website}</a>}
@@ -106,6 +111,7 @@ h1{margin:0;font-family:var(--font-display);font-weight:900;font-size:clamp(68px
 .fall .overline{margin-bottom:var(--space-3)}
 .fall__t{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1.02;text-transform:uppercase}
 .faelle__fuss{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:var(--space-4) 0}
+.kopf :global(.kopf__foto){margin-top:var(--space-6)}
 .worum{padding:var(--space-9) 0 var(--space-8)}
 .sec--m{padding:var(--space-8) 0}
 .stimmen{margin:0;border-top:1px solid var(--border-default)}

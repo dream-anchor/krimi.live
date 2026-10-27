@@ -1,6 +1,7 @@
 ---
 import Base from '../../../layouts/Base.astro';
 import Button from '../../../components/Button.astro';
+import Foto from '../../../components/Foto.astro';
 import Pruefen from '../../../components/Pruefen.astro';
 import FaqListe from '../../../components/FaqListe.astro';
 import { META } from '../../../data/meta';
@@ -59,7 +60,7 @@ const abschnitte = [
     <div class="wrap korpus">
       <div class="korpus__rand"></div>
       <div class="korpus__text">
-        {abschnitte.map(a => <section><h2 class="ah2">{a.h}</h2><p class="fliess">{a.t}</p></section>)}
+        {abschnitte.map((a, i) => <section><h2 class="ah2">{a.h}</h2><p class="fliess">{a.t}</p>{i === 1 && pb.data.bilder.klang && <Foto bild={pb.data.bilder.klang} ratio="4/5" sizes="(min-width: 800px) 420px, 100vw" class="klang" />}</section>)}
         <section class="beispiel">
           <p class="overline overline--hl bsp__l">Beispiel</p>
           <h2 class="ah2">Beispiel: „Pater Brown – Das Live-Hörspiel“</h2>
@@ -99,6 +100,7 @@ h1{margin:0;max-width:14ch;font-family:var(--font-display);font-weight:900;font-
 .korpus__rand{flex:1 1 180px}
 .korpus__text{flex:999 1 560px;min-width:0;max-width:720px;display:flex;flex-direction:column;gap:var(--space-8)}
 .ah2{margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);line-height:var(--lh-heading);text-transform:uppercase}
+:global(.klang){margin-top:var(--space-6);max-width:420px}
 .fliess{margin:0;font:var(--fw-regular) var(--fs-body-l)/1.65 var(--font-sans);color:var(--text-2);text-wrap:pretty}
 .beispiel{padding:var(--space-7);background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)}
 .bsp__l{margin-bottom:var(--space-3)}

@@ -18,7 +18,7 @@ const zeilen = feed.ok ? feed.events.slice(0, anzahl) : [];
 <div class="liste">
   {zeilen.map(e => (
     <div class:list={['row', e.abgesagt && 'row--ab']}>
-      <div class="when">{e.wd} {e.dt}<br />{e.t} Uhr</div>
+      <div class="when">{e.wd} {e.dt}{e.t && <><br />{e.t} Uhr</>}</div>
       <div class="where">
         {mitTitel && <p class="overline overline--muted titel">{e.format.titel}</p>}
         <div class="city">{e.city}</div>
@@ -28,7 +28,7 @@ const zeilen = feed.ok ? feed.events.slice(0, anzahl) : [];
         ? <Badge>Abgesagt</Badge>
         : <div class="act">
             {e.verschoben && <Badge tone="highlight">Verschoben</Badge>}
-            <Button variant="secondary" size="md" href={e.url} iconEnd="arrow-up-right">Tickets<span class="sr-only"> für {e.city}, {e.dt}</span></Button>
+            <Button variant="secondary" size="md" href={e.url} iconEnd={e.url.startsWith('tel:') ? 'phone' : 'arrow-up-right'}>{e.url.startsWith('tel:') ? 'Tickets per Telefon' : 'Tickets'}<span class="sr-only"> für {e.city}, {e.dt}</span></Button>
           </div>}
     </div>
   ))}

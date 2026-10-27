@@ -1,15 +1,19 @@
-# Terminfeed – Vorschlag für paterbrown.com
+# Terminfeed
 
-Stand: paterbrown.com bietet nach unserem Kenntnisstand keinen öffentlichen JSON-Endpunkt. [PRÜFEN: Endpunkt vorhanden?]
-Vorschlag: `https://paterbrown.com/api/termine.json`, erzeugt aus derselben Datenquelle wie die 48 TheaterEvent-Einträge im JSON-LD von /termine/.
+## Pater Brown (in Betrieb)
+krimi.live nutzt die bestehende öffentliche API von paterbrown.com:
+`https://paterbrown-api.antoine-dfc.workers.dev/api/tour-events` (Quelle: `paterbrown-api/src/routes/public.ts` im Repo paterbrown.com).
 
-## Format
+- Felder: `event_date` (YYYY-MM-DD), `city`, `venue`, `ticket_url`, `ticket_phone`, `is_active`.
+- Gleiche Ticket-Regel wie paterbrown.com (`src/lib/constants.ts`): nur buchbare Event-URLs, Zürich → Ticketcorner, sonst VVK-Telefon, sonst wird der Termin nicht gezeigt.
+- Die API liefert **keine Uhrzeit**. krimi.live zeigt deshalb nur das Datum, das Schema bekommt `startDate` als Datum ohne Uhrzeit. Kommt eine Uhrzeit (z. B. `start_time` mit Offset) dazu, übernimmt `src/lib/feed.ts` sie, sobald sie als `startDate` geliefert wird.
+
+## Format für weitere Stücke
 ```json
 {
   "generated": "2026-10-27T09:00:00+01:00",
   "termine": [
     {
-      "id": "stadt-jjjj-mm-tt",
       "startDate": "JJJJ-MM-TTTHH:MM:00+01:00",
       "doorTime":  "JJJJ-MM-TTTHH:MM:00+01:00",
       "timeZone": "Europe/Berlin",
@@ -24,10 +28,8 @@ Vorschlag: `https://paterbrown.com/api/termine.json`, erzeugt aus derselben Date
   ]
 }
 ```
-Regeln: startDate und doorTime mit Zeitzonen-Offset, doorTime vor startDate, Zürich mit "timeZone": "Europe/Zurich" und "currency": "CHF".
-Header: `Access-Control-Allow-Origin: https://krimi.live`, `Cache-Control: max-age=900`.
+`status` „EventCancelled“ markiert eine Absage (bleibt sichtbar, Schema `EventCancelled`), „EventPostponed“ eine Verschiebung.
 
-## Einbindung auf krimi.live
-1. Build (Astro): Feed abrufen, nur künftige Termine, sortiert; daraus Feed-Block und TheaterEvent-JSON-LD erzeugen. Täglicher Rebuild per Cloudflare Deploy Hook (Cron).
-2. Fallback: Ist der Feed nicht erreichbar, bricht der Build nicht ab. Der Block zeigt dann nur den Hinweis und den Button „Alle Termine“ → paterbrown.com/termine/, ohne TheaterEvent.
-3. Platzhalter im Text: termine_anzahl, letzter_termin_monat_jahr, naechster_termin – werden beim Build ersetzt; fehlt der Feed, entfällt der jeweilige Satz.
+## Einbindung
+- Abruf einmal pro Build und Stück, nur künftige Termine, sortiert; täglicher Rebuild per Cloudflare Deploy Hook.
+- Fällt ein Feed aus, bricht der Build nicht ab: Hinweis mit Link zur Terminseite, kein TheaterEvent.

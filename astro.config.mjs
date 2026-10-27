@@ -13,6 +13,6 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   integrations: [
-    sitemap({ filter: (page) => !fremdKanonisch.some(p => page.endsWith(p)) }),
+    sitemap({ filter: (page) => !fremdKanonisch.some(p => page.endsWith(p)) && !page.includes('/newsletter/') }),
   ],
 });

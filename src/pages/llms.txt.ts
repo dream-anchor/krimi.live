@@ -26,6 +26,6 @@ export const GET: APIRoute = async () => {
   for (const f of formate) {
     zeilen.push(`## Fakten: ${f.data.titel}`, ...f.data.fakten.map(x => `- ${x}`), `- Termine und Tickets: ${f.data.links.termine} (Anzahl und Zeitraum aus dem Feed, hier bewusst nicht aufgeführt)`, '');
   }
-  zeilen.push('## Kontakt', '- Dream & Anchor Handelsgesellschaft mbH, Telefon +49 89 909015 3943', `- Impressum: ${BASE}/impressum/`, '');
+  zeilen.push('## Kontakt', '- Dream & Anchor Handelsgesellschaft mbH, Nördliche Münchner Straße 27a, 82031 Grünwald, Telefon +49 89 909015 3943, hello@dream-anchor.com', `- Impressum: ${BASE}/impressum/`, '');
   return new Response(zeilen.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

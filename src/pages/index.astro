@@ -7,6 +7,8 @@ import FaqListe from '../components/FaqListe.astro';
 import { META } from '../data/meta';
 import { FAQ_START } from '../data/faq';
 import Badge from '../components/Badge.astro';
+import Foto from '../components/Foto.astro';
+import Newsletter from '../components/Newsletter.astro';
 import { getFeeds, platzhalter } from '../lib/feed';
 import { aktiveFormate, laufendeFormate, formatPfad, quellenText, ticketZiel, STATUS_TEXT } from '../lib/formate';
 import { baseGraph, faqPage, theaterEvents } from '../lib/schema';
@@ -70,6 +72,7 @@ const graph = [...baseGraph(meta), faqPage(meta, FAQ_START), ...(feed.ok ? theat
             <Button variant="secondary" size="lg" href={formatPfad(eins)}>Zum Format</Button>
             <Button variant="primary" size="lg" href={eins.data.links.termine} iconEnd="arrow-up-right">Tickets &amp; Termine</Button>
           </div>
+          {(eins.data.bilder.szene ?? eins.data.bilder.kopf) && <Foto bild={(eins.data.bilder.szene ?? eins.data.bilder.kopf)!} ratio="16/9" sizes="(min-width: 1248px) 760px, 100vw" class="format__foto" />}
         </div>
       </div>
     </section>
@@ -82,6 +85,7 @@ const graph = [...baseGraph(meta), faqPage(meta, FAQ_START), ...(feed.ok ? theat
         <div class="stuecke">
           {aktiv.map(f => (
             <article class="stueck">
+              {f.data.bilder.kopf && <Foto bild={f.data.bilder.kopf} ratio="3/2" sizes="(min-width: 1248px) 580px, 100vw" />}
               <div class="stueck__kopf">
                 <p class="overline overline--hl">{f.data.untertitel}</p>
                 {f.data.status !== 'laeuft' && <Badge tone="highlight">{STATUS_TEXT[f.data.status]}</Badge>}
@@ -125,6 +129,8 @@ const graph = [...baseGraph(meta), faqPage(meta, FAQ_START), ...(feed.ok ? theat
     </div>
   </section>
 
+  <Newsletter />
+
   <section aria-labelledby="h-faq" class="sec">
     <div class="wrap">
       <h2 id="h-faq" class="h2 mb7">Häufige Fragen</h2>
@@ -154,6 +160,7 @@ h1 .hl{color:var(--highlight)}
 .karte__text{flex:1 1 320px;min-width:0}
 .karte h3{margin:0 0 var(--space-4);font-family:var(--font-display);font-weight:900;font-size:clamp(40px,6vw,72px);line-height:1;text-transform:uppercase}
 .karte__pfeil{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);flex:0 0 auto}
+.format__foto{margin-top:var(--space-7)}
 .stuecke{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:var(--space-6)}
 .stueck{display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-7);background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--radius-lg)}
 .stueck__kopf{display:flex;flex-wrap:wrap;align-items:center;gap:12px}

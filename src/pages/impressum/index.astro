@@ -5,24 +5,19 @@ import { META } from '../../data/meta';
 import { baseGraph } from '../../lib/schema';
 
 const meta = META.impressum;
-// [PRÜFEN] Alle Werte aus dem aktuellen Impressum von paterbrown.com übernehmen; Sitz München oder Grünwald bestätigen.
-const felder: { k: string; v: string; tel?: string; belegt?: boolean }[] = [
-  { k: 'Anbieter', v: 'Dream & Anchor Handelsgesellschaft mbH', belegt: true },
-  { k: 'Anschrift', v: 'aus dem Impressum von paterbrown.com · Sitz München oder Grünwald zu bestätigen' },
-  { k: 'Vertreten durch', v: 'Geschäftsführung laut Handelsregister' },
-  { k: 'Registereintrag', v: 'Registergericht und HRB-Nummer' },
-  { k: 'USt-IdNr.', v: 'laut Impressum paterbrown.com' },
-  { k: 'Telefon', v: '+49 89 909015 3943', tel: '+49899090153943', belegt: true },
-  { k: 'E-Mail', v: 'laut Impressum paterbrown.com' },
-  { k: 'Inhaltlich verantwortlich', v: 'Person nach § 18 Abs. 2 MStV, Anschrift' },
-];
+// Angaben aus dem Impressum von paterbrown.com (Stand 27.10.2026), auf krimi.live angepasst.
 ---
 <Base meta={meta} graph={baseGraph(meta)}>
-  <RechtsSeite title="Impressum" intro="Die Angaben werden aus dem aktuellen Impressum von paterbrown.com übernommen und auf die Domain krimi.live angepasst. Die Felder unten zeigen die Struktur; Werte ohne Beleg sind leer.">
+  <RechtsSeite title="Impressum" intro="Angaben gemäß § 5 DDG für krimi.live.">
     <dl class="felder">
-      {felder.map(f => (
-        <div><dt>{f.k}</dt><dd class:list={[!f.belegt && 'offen']}>{f.tel ? <a href={`tel:${f.tel}`}>{f.v}</a> : f.v}</dd></div>
-      ))}
+      <div><dt>Anbieter</dt><dd>Dream &amp; Anchor Handelsgesellschaft mbH<br />Nördliche Münchner Straße 27a<br />82031 Grünwald</dd></div>
+      <div><dt>Kontakt</dt><dd>Telefon: <a href="tel:+49899090153943">+49 89 909015 3943</a><br />E-Mail: <a href="mailto:hello@dream-anchor.com">hello@dream-anchor.com</a></dd></div>
+      <div><dt>Vertreten durch</dt><dd>Antoine Monot, Geschäftsführer</dd></div>
+      <div><dt>Registereintrag</dt><dd>Registergericht: Amtsgericht München<br />Registernummer: HRB 241987</dd></div>
+      <div><dt>USt-IdNr.</dt><dd>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: DE320291075</dd></div>
+      <div><dt>Inhaltlich verantwortlich</dt><dd>nach § 18 Abs. 2 MStV: Antoine Monot, Nördliche Münchner Straße 27a, 82031 Grünwald</dd></div>
+      <div><dt>Verbraucherstreitbeilegung</dt><dd>Wir sind nicht bereit und nicht verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</dd></div>
+      <div><dt>Fotos</dt><dd>© Pater Brown – Das Live-Hörspiel / Alexander Frank</dd></div>
     </dl>
   </RechtsSeite>
 </Base>
@@ -30,6 +25,5 @@ const felder: { k: string; v: string; tel?: string; belegt?: boolean }[] = [
 .felder{margin:0;border-top:1px solid var(--border-default)}
 .felder div{display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)}
 dt{flex:1 1 200px;font:var(--fw-medium) 13px/1.5 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
-dd{flex:3 1 320px;margin:0;color:var(--text-1)}
-dd.offen{color:var(--text-2)}
+dd{flex:3 1 320px;margin:0;color:var(--text-1);line-height:var(--lh-body)}
 </style>

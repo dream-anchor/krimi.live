@@ -5,28 +5,34 @@ import { META } from '../../data/meta';
 import { baseGraph } from '../../lib/schema';
 
 const meta = META.datenschutz;
-// [PRÜFEN] Text aus der Datenschutzerklärung von paterbrown.com übernehmen und auf die eingesetzten Dienste anpassen.
-const abschnitte = [
-  'Verantwortlicher (Verweis auf das Impressum)',
-  'Hosting bei Cloudflare Pages, Server-Logdaten',
-  'Cookielose Reichweitenmessung, Dienst noch festzulegen',
-  'Schriften lokal ausgeliefert, keine Verbindung zu Google Fonts',
-  'Links zu paterbrown.com und Ticketanbietern',
-  'Rechte der betroffenen Personen, Beschwerderecht',
-];
+// Grundlage: Datenschutzerklärung von paterbrown.com (Stand 27.10.2026), angepasst auf die Dienste von krimi.live.
 ---
 <Base meta={meta} graph={baseGraph(meta)}>
-  <RechtsSeite title="Datenschutz" intro="Grundlage ist die Datenschutzerklärung von paterbrown.com. Für krimi.live werden nur die Abschnitte übernommen, die zu den tatsächlich eingesetzten Diensten passen:">
-    <ol class="liste">
-      {abschnitte.map((a, i) => <li><span class="nr">{String(i + 1).padStart(2, '0')}</span><span class="t">{a}</span></li>)}
-    </ol>
-    <p class="body schluss">Keine Cookies, kein Tracking, kein Newsletter. Ein Newsletter folgt nur mit Double-Opt-in und angebundenem Versandsystem.</p>
+  <RechtsSeite title="Datenschutz" intro="Diese Erklärung beschreibt, welche personenbezogenen Daten beim Besuch von krimi.live verarbeitet werden. krimi.live setzt keine Cookies, nutzt kein Tracking und lädt keine Schriften oder Skripte von Drittanbietern.">
+    <h2>1. Verantwortliche Stelle</h2>
+    <p>Dream &amp; Anchor Handelsgesellschaft mbH<br />Nördliche Münchner Straße 27a<br />82031 Grünwald<br />Telefon: +49 89 909015 3943<br />E-Mail: <a href="mailto:hello@dream-anchor.com">hello@dream-anchor.com</a></p>
+
+    <h2>2. Hosting und Server-Logdaten</h2>
+    <p>krimi.live wird über Cloudflare Pages ausgeliefert. Anbieter ist die Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA. Beim Aufruf der Seiten verarbeitet Cloudflare technisch notwendige Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Adresse, Referrer, Browsertyp und Betriebssystem. Diese Daten dienen der sicheren und zuverlässigen Auslieferung der Website und werden nicht mit anderen Datenquellen zusammengeführt.</p>
+    <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt in einer sicheren und stabilen Bereitstellung. Cloudflare ist nach dem EU-US Data Privacy Framework zertifiziert. Mit Cloudflare besteht ein Vertrag über Auftragsverarbeitung. Weitere Informationen: <a href="https://www.cloudflare.com/de-de/privacypolicy/">cloudflare.com/privacypolicy</a></p>
+
+    <h2>3. Keine Cookies, keine Reichweitenmessung</h2>
+    <p>krimi.live speichert keine Cookies und greift nicht auf Informationen in Ihrem Endgerät zu. Es findet keine Reichweitenmessung und kein Tracking statt. Schriften und Symbole werden von unserem eigenen Server geladen; es besteht keine Verbindung zu Google Fonts oder anderen Schriftanbietern.</p>
+
+    <h2>4. Newsletter und Warteliste (Brevo)</h2>
+    <p>Wenn Sie sich für den Newsletter oder die Warteliste für neue Stücke eintragen, übermitteln wir Ihre E-Mail-Adresse an die Brevo GmbH, Köpenicker Str. 126, 10179 Berlin. Brevo speichert die Daten für den Versand. Die Anmeldung wird erst wirksam, wenn Sie den Link in der Bestätigungs-E-Mail anklicken (Double-Opt-in).</p>
+    <p>Rechtsgrundlage ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Sie können sie jederzeit über den Abmeldelink in jeder E-Mail widerrufen. Weitere Informationen: <a href="https://www.brevo.com/de/legal/privacypolicy/">brevo.com/de/legal/privacypolicy</a></p>
+
+    <h2>5. Anfragen per E-Mail oder Telefon</h2>
+    <p>Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir Ihre Anfrage samt der darin enthaltenen Daten, um Ihr Anliegen zu bearbeiten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die Anfrage mit einem Vertrag zusammenhängt, sonst Art. 6 Abs. 1 lit. f DSGVO.</p>
+
+    <h2>6. Links zu paterbrown.com und Ticketanbietern</h2>
+    <p>krimi.live verlinkt auf die Seiten der Stücke, etwa paterbrown.com, und auf Ticketanbieter wie Eventim (CTS EVENTIM AG &amp; Co. KGaA), Reservix (Reservix GmbH) und Ticketcorner (Ticketcorner Holding AG). Mit dem Klick verlassen Sie krimi.live; die Betreiber verarbeiten Ihre Daten nach ihren eigenen Datenschutzbestimmungen. Ticketlinks können Affiliate-Links sein: Beim Kauf erhalten wir eine Provision, der Ticketpreis ändert sich dadurch nicht.</p>
+
+    <h2>7. Ihre Rechte</h2>
+    <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten, auf Datenübertragbarkeit sowie auf Widerspruch gegen Verarbeitungen nach Art. 6 Abs. 1 lit. f DSGVO (Art. 21 DSGVO). Eine erteilte Einwilligung können Sie jederzeit für die Zukunft widerrufen. Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren, etwa in dem Mitgliedstaat Ihres Aufenthalts oder Arbeitsplatzes.</p>
+
+    <h2>8. Speicherdauer</h2>
+    <p>Soweit nicht anders angegeben, speichern wir personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungsfristen es verlangen.</p>
   </RechtsSeite>
 </Base>
-<style>
-.liste{margin:0;padding:0;list-style:none;border-top:1px solid var(--border-default)}
-li{display:flex;flex-wrap:wrap;gap:4px 24px;padding:var(--space-4) 0;border-bottom:1px solid var(--border-default)}
-.nr{flex:0 0 40px;font:var(--fw-medium) 13px/1.6 var(--font-mono);color:var(--highlight)}
-.t{flex:1 1 300px;color:var(--text-1)}
-.schluss{margin-top:var(--space-6)}
-</style>

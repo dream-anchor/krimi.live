@@ -11,21 +11,44 @@
   "overline": "Format · Live-Hörspiel · auf Tour",
   "vorlage": "Nach G. K. Chesterton · zwei Fälle an einem Abend",
   "teile": [
-    { "label": "Fall 1", "titel": "„Das blaue Kreuz“" },
-    { "label": "Fall 2", "titel": "„Die fallenden Brüder“" }
+    {
+      "label": "Fall 1",
+      "titel": "„Das blaue Kreuz“"
+    },
+    {
+      "label": "Fall 2",
+      "titel": "„Die fallenden Brüder“"
+    }
   ],
   "teilePruefen": "Programm",
   "teaser": "Zwei Schauspieler sprechen alle Rollen. Beatboxer erzeugen sämtliche Geräusche live mit Stimme und Loop-Station, ohne Playback. Pro Abend gibt es zwei Fälle nach G. K. Chesterton, in etwa zwei Stunden inklusive Pause.",
   "worum": "Pater Brown, der unscheinbare Pfarrer aus den Kriminalgeschichten von G. K. Chesterton, löst seine Fälle durch Menschenkenntnis statt durch Spurensicherung. Im Live-Hörspiel erleben Zuschauer zwei dieser Fälle an einem Abend, nur mit Stimme, Geräusch und Fantasie.",
   "ensemble": [
-    { "name": "Antoine Monot", "rolle": "Pater Brown · Co-Produzent" },
-    { "name": "Wanja Mues", "rolle": "Erzähler und Flambeau" },
-    { "name": "Marvelin · Hans Beatbox · Eyota", "rolle": "Beatbox, je nach Abend" }
+    {
+      "name": "Antoine Monot",
+      "rolle": "Pater Brown · Co-Produzent"
+    },
+    {
+      "name": "Wanja Mues",
+      "rolle": "Erzähler und Flambeau"
+    },
+    {
+      "name": "Marvelin · Hans Beatbox · Eyota",
+      "rolle": "Beatbox, je nach Abend"
+    }
   ],
   "ensemblePruefen": "Rollen (monot.com widerspricht)",
-  "ensembleHinweis": { "text": "Beide Schauspieler kennt das Fernsehpublikum aus „Ein Fall für zwei“ (ZDF).", "pruefen": "TV-Bezug" },
-  "credits": ["Künstlerische Leitung & Creative Producerin: Stefanie Sick"],
-  "ablauf": { "text": "Etwa zwei Stunden inklusive 15 Minuten Pause, ohne Kostümwechsel und ohne Bühnenbild. Empfohlen ab etwa 12 Jahren.", "pruefen": "Bühnenbild" },
+  "ensembleHinweis": {
+    "text": "Beide Schauspieler kennt das Fernsehpublikum aus „Ein Fall für zwei“ (ZDF).",
+    "pruefen": "TV-Bezug"
+  },
+  "credits": [
+    "Künstlerische Leitung & Creative Producerin: Stefanie Sick"
+  ],
+  "ablauf": {
+    "text": "Etwa zwei Stunden inklusive 15 Minuten Pause, ohne Kostümwechsel und ohne Bühnenbild. Empfohlen ab etwa 12 Jahren.",
+    "pruefen": "Bühnenbild"
+  },
   "fakten": [
     "Ensemble: Antoine Monot (Pater Brown, Co-Produzent), Wanja Mues (Erzähler und Flambeau), Beatboxer Marvelin, Hans Beatbox oder Eyota (je nach Abend)",
     "Künstlerische Leitung & Creative Producerin: Stefanie Sick",
@@ -41,5 +64,31 @@
     "websiteText": "Mehr zur Show, zum Ensemble und zur Presse bei paterbrown.com",
     "canonical": "https://paterbrown.com/live-hoerspiel/"
   },
-  "feed": { "url": "https://paterbrown.com/api/termine.json", "name": "paterbrown.com" }
+  "feed": {
+    "url": "https://paterbrown-api.antoine-dfc.workers.dev/api/tour-events",
+    "name": "paterbrown.com"
+  },
+  "bilder": {
+    "kopf": {
+      "datei": "/images/pater-brown/pater-brown-ensemble-monot-mues-marvelin-af",
+      "breite": 2000,
+      "hoehe": 1500,
+      "alt": "Antoine Monot und Wanja Mues an den Mikrofonen im blauen Bühnenlicht, dahinter der Beatboxer",
+      "credit": "© Pater Brown – Das Live-Hörspiel / Alexander Frank"
+    },
+    "szene": {
+      "datei": "/images/pater-brown/pater-brown-dialog-szene-monot-mues-af",
+      "breite": 2000,
+      "hoehe": 1500,
+      "alt": "Antoine Monot und Wanja Mues im Dialog auf der Bühne, beide mit Mikrofon",
+      "credit": "© Pater Brown – Das Live-Hörspiel / Alexander Frank"
+    },
+    "klang": {
+      "datei": "/images/pater-brown/pater-brown-buehne-ensemble-marvelin-af",
+      "breite": 2000,
+      "hoehe": 2666,
+      "alt": "Das Ensemble mit Live-Beatboxer auf der Bühne",
+      "credit": "© Pater Brown – Das Live-Hörspiel / Alexander Frank"
+    }
+  }
 }

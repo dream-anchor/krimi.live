@@ -7,6 +7,13 @@ import { glob } from 'astro/loaders';
  */
 const mitPruefung = z.object({ text: z.string(), pruefen: z.string().optional() });
 
+const bild = z.object({
+  datei: z.string(),            // Basisname unter /public/images/<stück>/, Varianten -768/-1200 und Original
+  breite: z.number(), hoehe: z.number(),
+  alt: z.string(),
+  credit: z.string(),           // Pflicht: Fotocredit je Bild
+});
+
 const formate = defineCollection({
   loader: glob({ pattern: '*.json', base: './src/content/formate' }),
   schema: z.object({
@@ -37,6 +44,7 @@ const formate = defineCollection({
       canonical: z.string().url().optional(), // gesetzt → Formatseite ist nicht kanonisch, nicht in der Sitemap
     }),
     feed: z.object({ url: z.string().url(), name: z.string() }).optional(),
+    bilder: z.object({ kopf: bild.optional(), szene: bild.optional(), klang: bild.optional() }).default({}),
   }),
 });
 

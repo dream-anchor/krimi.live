@@ -11,7 +11,7 @@ import Button from '../components/Button.astro';
 import { BASE } from '../data/config';
 import { aktiveFormate, laufendeFormate, formatPfad, ticketZiel } from '../lib/formate';
 import type { PageMeta } from '../data/meta';
-interface Props { meta: PageMeta; graph: any[] }
+interface Props { meta: PageMeta; graph: any[]; ogImage?: { datei: string; alt: string }; noindex?: boolean }
 const { meta, graph } = Astro.props;
 const canonical = meta.canonical || BASE + meta.path;
 const ld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
@@ -20,6 +20,7 @@ const aktiv = await aktiveFormate();
 const laufend = await laufendeFormate();
 const tickets = ticketZiel(laufend);
 const formatLink = aktiv.length === 1 ? formatPfad(aktiv[0]) : '/#buehne';
+const og = Astro.props.ogImage ?? aktiv[0]?.data.bilder.kopf;
 const nav = [
   { href: formatLink, label: aktiv.length === 1 ? 'Format' : 'Formate' },
   { href: '/hintergruende/was-ist-ein-live-hoerspiel/', label: 'Hintergründe' },
@@ -34,6 +35,7 @@ const nav = [
   <title>{meta.title}</title>
   <meta name="description" content={meta.desc} />
   <link rel="canonical" href={canonical} />
+  {Astro.props.noindex && <meta name="robots" content="noindex, follow" />}
   <meta name="theme-color" content="#0B0A09" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="de_DE" />
@@ -41,6 +43,9 @@ const nav = [
   <meta property="og:title" content={meta.title} />
   <meta property="og:description" content={meta.desc} />
   <meta property="og:url" content={canonical} />
+  {og && <meta property="og:image" content={`${BASE}${og.datei}-1200.webp`} />}
+  {og && <meta property="og:image:alt" content={og.alt} />}
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="sitemap" href="/sitemap-index.xml" />
   <script type="application/ld+json" set:html={ld} />
