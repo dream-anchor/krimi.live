@@ -1,2 +1,2 @@
 # Cloudflare Pages – www auf Apex, 301
-https://www.krimi.live/* https://krimi.live/:splat 301
+# www → ohne www erledigt functions/_middleware.js (Pages-_redirects kennt keine Host-Regeln)
